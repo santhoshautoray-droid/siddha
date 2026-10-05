@@ -96,10 +96,10 @@ if ('IntersectionObserver' in window && !siteMotionPaused()) {
 const statsSection = document.querySelector('.home-stats-band');
 if (statsSection) {
   const milestones = [
-    { value: 5, label: 'Years of experience', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V6m0 12h16M8 14l4-4 3 3 5-6"/></svg>' },
-    { value: 500, label: 'Health concerns supported', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10Z"/></svg>' },
-    { value: 700, label: 'Treatments', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></svg>' },
-    { value: 5000, label: 'Clients served', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20c.6-3.5 3-5 7-5s6.4 1.5 7 5"/></svg>' },
+    { value: 5, label: 'Years of experience', detail: 'Thoughtful, personal Siddha care', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-7 3v4l3 2"/></svg>' },
+    { value: 500, label: 'Health concerns supported', detail: 'Individual concerns, carefully heard', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10Z"/><path d="M8.5 12h2l1.2-2.2 1.5 4 1.1-1.8h1.4"/></svg>' },
+    { value: 700, label: 'Treatments', detail: 'Care plans considered with clarity', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h8v4a4 4 0 0 1-8 0V5Zm4 8v6m-3-3h6"/><path d="M5 5h2m10 0h2"/></svg>' },
+    { value: 5000, label: 'Clients served', detail: 'People and families across Chennai', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6 20c.6-3.5 2.7-5 6-5s5.4 1.5 6 5M5.5 11.5a2.3 2.3 0 1 1 1.6-4M18.5 11.5a2.3 2.3 0 1 0-1.6-4"/></svg>' },
   ];
   const background = statsSection.querySelector('.home-stats-background');
   const formatNumber = new Intl.NumberFormat('en-IN');
@@ -114,7 +114,7 @@ if (statsSection) {
         <p class="eyebrow">Siddha365 milestones</p>
       </header>
       <div class="clinic-statistics__grid" aria-label="Siddha365 clinic statistics">
-        ${milestones.map((milestone, index) => `<article class="clinic-statistic" style="--stat-index:${index}"><span class="clinic-statistic__icon">${milestone.icon}</span><strong data-stat-count="${milestone.value}" aria-label="${displayNumber(milestone.value)} ${milestone.label}">${displayNumber(milestone.value)}</strong><span class="clinic-statistic__label">${milestone.label}</span><span class="clinic-statistic__line" aria-hidden="true"></span></article>`).join('')}
+        ${milestones.map((milestone, index) => `<article class="clinic-statistic" style="--stat-index:${index}"><span class="clinic-statistic__icon">${milestone.icon}</span><strong data-stat-count="${milestone.value}" aria-label="${displayNumber(milestone.value)} ${milestone.label}">${displayNumber(milestone.value)}</strong><span class="clinic-statistic__label">${milestone.label}</span><span class="clinic-statistic__detail">${milestone.detail}</span><span class="clinic-statistic__line" aria-hidden="true"></span></article>`).join('')}
       </div>
     </div>`;
   const counters = [...statsSection.querySelectorAll('[data-stat-count]')];

@@ -1260,14 +1260,17 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
 .clinic-statistic__icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.55; }
 .clinic-statistic strong { display: block; color: #f1f4ee; font-family: 'Manrope', 'DM Sans', sans-serif; font-size: clamp(2.3rem, 4vw, 4.1rem); font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: -.07em; line-height: .96; }
 .clinic-statistic__label { display: block; max-width: 15ch; min-height: 2.8em; margin-top: 13px; color: #d7dfd4; font-size: .72rem; font-weight: 750; letter-spacing: .09em; line-height: 1.4; text-transform: uppercase; }
+.clinic-statistic__detail { display: block; max-width: 22ch; margin-top: 7px; color: #93a094; font-size: .73rem; line-height: 1.45; }
 .clinic-statistic__line { display: block; width: 30px; height: 1px; margin-top: 15px; background: rgba(167, 216, 112, .72); }
 
 @media (max-width: 900px) {
   .clinic-statistics__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .clinic-statistic { padding: 17px 22px; }
+  .clinic-statistic { padding: 17px 22px; text-align: center; }
   .clinic-statistic:first-child { padding-left: 0; }
   .clinic-statistic:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid rgba(221, 238, 213, .14); }
   .clinic-statistic:nth-child(4) { border-top: 1px solid rgba(221, 238, 213, .14); }
+  .clinic-statistic__icon, .clinic-statistic__line { margin-inline: auto; }
+  .clinic-statistic__label, .clinic-statistic__detail { margin-inline: auto; }
 }
 @media (max-width: 560px) {
   .home-stats-band.clinic-statistics { padding-block: 30px 32px; }
@@ -1281,7 +1284,12 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
   .clinic-statistic__icon svg { width: 16px; height: 16px; }
   .clinic-statistic strong { font-size: clamp(2rem, 11.3vw, 3rem); }
   .clinic-statistic__label { min-height: 3.4em; margin-top: 8px; font-size: .59rem; letter-spacing: .055em; line-height: 1.35; }
+  .clinic-statistic { text-align: center; }
+  .clinic-statistic__icon { margin-inline: auto; }
+  .clinic-statistic__label, .clinic-statistic__detail { max-width: 15ch; margin-inline: auto; }
+  .clinic-statistic__detail { margin-top: 5px; font-size: .61rem; line-height: 1.35; }
   .clinic-statistic__line { width: 20px; margin-top: 9px; }
+  .clinic-statistic__line { margin-inline: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
