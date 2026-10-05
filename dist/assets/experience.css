@@ -39,6 +39,33 @@
 .home-video-card { background: #0b130e91; }
 .home-video-card:focus-within { border-color: #a9dc7366; }
 
+/* Homepage media stage: one moving image field with the clinic content and videos above it. */
+.home-gallery-section { padding: 22px 0 30px; background: #081009; }
+.home-hero-stage { position: relative; min-height: clamp(570px, 62vw, 690px); overflow: hidden; border: 1px solid #cce6bd24; border-radius: 28px; isolation: isolate; background: #0d1710; box-shadow: 0 28px 70px #0000004a; }
+.home-hero-stage .home-gallery { position: absolute; z-index: -3; inset: 0; display: block; overflow: hidden; border: 0; border-radius: 0; background: transparent; }
+.home-hero-stage .home-gallery-track { height: 100%; gap: 0; border-radius: 0; scroll-snap-type: x mandatory; }
+.home-hero-stage .home-slide { height: 100%; min-height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; background: #101a12; }
+.home-hero-stage .home-slide-image { transform: none; filter: saturate(.78) brightness(.59); }
+.home-hero-stage .home-slide:hover .home-slide-image { transform: none; }
+.home-stage-shade { position: absolute; z-index: -2; inset: 0; pointer-events: none; background: linear-gradient(90deg,#071007e8 0%,#0b1509c2 36%,#0a100c4d 67%,#050b07bd 100%), linear-gradient(0deg,#071008aa 0%,transparent 52%); }
+.home-hero-stage .home-gallery-controls { top: auto; right: 26px; bottom: 25px; left: auto; width: auto; gap: 9px; transform: none; }
+.home-hero-stage .home-gallery-controls .icon-button { width: 39px; height: 39px; background: #0710089e; border-color: #d6f2c44d; }
+.home-stage-copy { position: relative; z-index: 1; display: flex; max-width: min(600px,55%); min-height: clamp(570px,62vw,690px); padding: clamp(42px,6vw,88px) 0 clamp(76px,7vw,96px) clamp(30px,5vw,72px); flex-direction: column; justify-content: center; align-items: flex-start; }
+.home-stage-copy h1 { max-width: 11ch; margin: 14px 0 19px; font-size: clamp(2.45rem,5vw,4.6rem); line-height: 1.02; letter-spacing: -.055em; text-wrap: balance; }
+.home-stage-copy > p:last-of-type { max-width: 45ch; margin: 0; color: #e1e9dc; font-size: clamp(.95rem,1.35vw,1.08rem); line-height: 1.75; }
+.home-stage-copy .home-hero-actions { margin: 25px 0 21px; }
+.home-stage-copy .home-hero-details { color: #d2dfcd; }
+.home-stage-videos { position: absolute; z-index: 2; top: 50%; right: clamp(20px,3vw,42px); width: clamp(270px,23vw,340px); height: clamp(350px,33vw,420px); padding: 14px; transform: translateY(-50%); border: 1px solid #d8ecc933; border-radius: 20px; background: #0810089e; box-shadow: 0 18px 52px #00000050; backdrop-filter: blur(10px); }
+.home-stage-videos .home-video-rail-head { margin-bottom: 9px; }
+.home-stage-videos .home-video-rail-head h2 { font-size: 1.2rem; }
+.home-stage-videos .home-video-rail-head .eyebrow { font-size: .61rem; }
+.home-stage-videos .home-video-rail-window { overflow: hidden; }
+.home-stage-videos .home-video-card { min-height: 76px; grid-template-columns: 112px minmax(0,1fr); padding: 5px; border-color: #d9ecc921; border-radius: 11px; background: #07100892; }
+.home-stage-videos .home-video-card p { font-size: .74rem; }
+.home-stage-videos .home-video-poster { border-radius: 7px; }
+.home-stage-videos .home-video-poster .video-play-icon { width: 29px; height: 29px; }
+.home-gallery-caption, .home-stage-videos .home-video-rail-note { display: none; }
+
 /* A patient-directed first-visit journey. All text is available without JS. */
 .home-visit-card { padding: 27px 28px 23px; background: linear-gradient(135deg,#233423c4,#111b14); border: 1px solid #a9dc732b; box-shadow: inset 0 1px 0 #d5e7c708,0 18px 45px #00000012; justify-content: flex-start; }
 .home-visit-card h2 { font-size: clamp(1.35rem,2vw,1.75rem); line-height: 1.25; margin: 0 0 23px; letter-spacing: -.035em; }
@@ -155,6 +182,14 @@
   .home-gallery-layout { grid-template-columns: 1fr; }
   .care-panel { gap: 22px; }
 }
+@media (max-width: 800px) {
+  .home-hero-stage { min-height: 720px; border-radius: 22px; }
+  .home-stage-copy { max-width: 620px; min-height: 0; padding: 48px 28px 16px; }
+  .home-stage-copy h1 { max-width: 12ch; font-size: clamp(2.5rem,8.5vw,3.75rem); }
+  .home-stage-videos { top: auto; right: 22px; bottom: 20px; left: 22px; width: auto; height: 245px; transform: none; }
+  .home-stage-videos .home-video-card { min-height: 70px; }
+  .home-hero-stage .home-gallery-controls { right: 28px; bottom: 280px; }
+}
 @media (max-width: 600px) {
   .utility-inner { justify-content: space-between; }
   .utility-actions { justify-content: space-between; width: 100%; gap: 12px; }
@@ -173,6 +208,14 @@
   .journey-link { align-self: stretch; }
   .home-gallery-layout { gap: 22px; }
   .home-video-rail { height: 391px; }
+  .home-hero-stage { min-height: 690px; border-radius: 18px; }
+  .home-stage-copy { padding: 37px 20px 14px; }
+  .home-stage-copy h1 { max-width: 11ch; font-size: clamp(2.3rem,10vw,3.1rem); }
+  .home-stage-copy .home-hero-actions { margin-block: 20px 17px; }
+  .home-stage-videos { right: 12px; bottom: 12px; left: 12px; height: 228px; padding: 11px; border-radius: 16px; }
+  .home-stage-videos .home-video-card { min-height: 67px; grid-template-columns: 98px minmax(0,1fr); }
+  .home-stage-videos .home-video-card p { font-size: .7rem; }
+  .home-hero-stage .home-gallery-controls { right: 18px; bottom: 250px; }
   .care-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 6px; gap: 5px; }
   .care-tabs button { min-height: 47px; padding-inline: 12px; font-size: .76rem; }
   .care-panel { grid-template-columns: 1fr; gap: 24px; padding: 18px; }
