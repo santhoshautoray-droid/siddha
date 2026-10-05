@@ -1295,3 +1295,25 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
 @media (prefers-reduced-motion: reduce) {
   .clinic-statistic { opacity: 1; transform: none; transition: none; }
 }
+
+/* Clinic marks share one quiet rhythm; the loader keeps its own animation. */
+.clinic-statistics__header .eyebrow::before {
+  width: 22px;
+  height: 22px;
+  background: url('../wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png') center / contain no-repeat;
+}
+.brand img,
+.partner-logo img,
+.review-feed-placeholder > img {
+  animation: clinic-logo-breathe 4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes clinic-logo-breathe {
+  0%, 100% { transform: translateY(0) scale(1); filter: saturate(1); }
+  50% { transform: translateY(-2px) scale(1.025); filter: saturate(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand img,
+  .partner-logo img,
+  .review-feed-placeholder > img { animation: none; }
+}
