@@ -18,7 +18,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--bg); }
-body { margin: 0; color: var(--text); background: var(--bg); line-height: 1.65; }
+body { margin: 0; overflow-x: clip; color: var(--text); background: var(--bg); line-height: 1.65; }
 body, button, a { -webkit-tap-highlight-color: transparent; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -406,6 +406,12 @@ h3 { margin-bottom: 10px; font-size: 1.18rem; font-weight: 650; }
   .footer-grid > :last-child { grid-column: auto; }
   .footer-bottom { align-items: flex-start; flex-direction: column; }
   .partner-logo { width: 138px; height: 100px; }
+}
+
+/* Keep long links and translated care names inside compact page cards. */
+@media (max-width: 720px) {
+  .page-hero, .condition-content, .care-panel, .review-card, .footer-grid { overflow-wrap: anywhere; }
+  .button, .text-link { max-width: 100%; text-align: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
