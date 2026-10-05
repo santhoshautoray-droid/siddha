@@ -31,7 +31,7 @@ if (menuButton && navigation) {
     }
   });
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1180) setMenuOpen(false);
+    if (window.innerWidth > 1040) setMenuOpen(false);
   });
 }
 

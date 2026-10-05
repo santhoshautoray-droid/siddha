@@ -10,10 +10,10 @@
 .motion-toggle::before { content: 'Ⅱ'; color: var(--green); font-size: .8rem; }
 .motion-toggle[aria-pressed='true']::before { content: '▷'; }
 .motion-toggle:hover { color: var(--green); }
-.site-header { box-shadow: 0 5px 25px #00000012; }
-.nav-links a:not(.button) { position: relative; }
-.nav-links a[aria-current='page']:not(.button) { text-decoration: none; }
-.nav-links a[aria-current='page']:not(.button)::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 18px; height: 2px; background: var(--green); border-radius: 3px; }
+@media (min-width: 1041px) {
+  .nav-links a:not(.button) { position: relative; }
+  .nav-links a[aria-current='page']:not(.button) { text-decoration: none; }
+}
 
 /* Soft botanical light stays behind content and never delays reading. */
 .home-gallery-section { position: relative; isolation: isolate; overflow: hidden; padding: 42px 0 36px; background: linear-gradient(140deg,#111d15 0%,#0a110d 53%,#101b13 100%); }

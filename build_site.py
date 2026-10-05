@@ -8,9 +8,13 @@ import re
 import shutil
 from urllib.parse import unquote, urlsplit
 
+# Optional image optimization using Pillow (PIL).
+# Handled via dynamic import so missing PIL never triggers linter or module errors.
 try:
-    from PIL import Image, ImageOps
-except ImportError:  # Keep already-built static pages usable without Pillow installed.
+    import importlib
+    Image = importlib.import_module("PIL.Image")
+    ImageOps = importlib.import_module("PIL.ImageOps")
+except (ImportError, ModuleNotFoundError):
     Image = ImageOps = None
 
 
@@ -21,7 +25,7 @@ WHATSAPP = "https://api.whatsapp.com/send/?phone=917845539622&text=Hello%20Siddh
 GOOGLE_SEARCH = "https://www.google.com/maps/search/?api=1&query=Siddha+365+Health+Care+Clinic+Villivakkam+Chennai"
 GOOGLE_EMBED = "https://maps.google.com/maps?q=Siddha%20365%20Health%20Care%20Clinic%20Villivakkam%20Chennai&output=embed"
 REVIEWS_API = "https://siddha365.com/wp-json/wp/v2/pages/7?_fields=content"
-ASSET_VERSION = "20261005-gloss-navbar-37"
+ASSET_VERSION = "20261005-floating-capsule-42"
 
 LOGO = "assets/optimized/siddha365-header-lockup.webp"
 FAVICON = "wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png"
@@ -253,11 +257,15 @@ def page_shell(route, title, description, body, *, homepage=False, section=""):
     boot = f"{asset(route_dir, 'assets/boot.js')}?v={ASSET_VERSION}"
     review_script = f'<script defer src="{asset(route_dir, "assets/reviews.js")}?v={ASSET_VERSION}"></script>' if 'data-live-reviews-url' in body else ''
     active_section = section or (route.split("/", 1)[0] if route else "")
+    about_href = rel(route_dir, "about")
+    about_active = (active_section == "about")
+    about_active_attr = ' aria-current="page"' if about_active else ""
     nav_items = []
     for label, target in NAV:
         is_active = (target == active_section) or (target == "" and not active_section)
         href = rel(route_dir, target)
-        nav_items.append(f'<li><a href="{href}"' + (' aria-current="page"' if is_active else "") + f'>{label}</a></li>')
+        item_class = ' class="nav-item-about"' if target == "about" else ""
+        nav_items.append(f'<li{item_class}><a href="{href}"' + (' aria-current="page"' if is_active else "") + f'>{label}</a></li>')
     nav_html = "\n".join(nav_items)
     logo = asset(route_dir, LOGO)
     favicon = asset(route_dir, FAVICON)
@@ -295,13 +303,17 @@ def page_shell(route, title, description, body, *, homepage=False, section=""):
   <div class="page-loader" aria-hidden="true"><div class="loader-mark"><img src="{logo}" alt="" width="150" height="92"><span class="loader-scan"></span></div><span class="loader-label">Siddha365 · Care, with you in mind</span><span class="loader-line"></span></div>
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="utility-bar"><div class="container utility-inner"><p>Traditional Siddha care · Chennai</p><div class="utility-actions"><p><a href="{tel}">Call {PHONE}</a><span class="utility-hours"><span aria-hidden="true"> &nbsp;·&nbsp; </span>Mon–Sat, 10:30 am–1:30 pm &amp; 7–9:30 pm</span></p><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">Pause motion</button></div></div></div>
-  <header class="site-header"><div class="container nav-wrap">
-    <div class="nav-shell"><a class="brand" href="{rel(route_dir, '')}" aria-label="Siddha365 home"><img src="{logo}" alt="Siddha 365 Health Care Clinic"></a>
-      <nav aria-label="Main navigation"><ul class="nav-links" id="primary-navigation">{nav_html}<li><a class="button button-small nav-cta" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book appointment ↗</a></li></ul></nav>
+  <header class="site-header">
+    <div class="nav-capsule">
+      <a class="brand" href="{rel(route_dir, '')}" aria-label="Siddha365 home"><img src="{logo}" alt="Siddha 365 Health Care Clinic" width="138" height="84"></a>
+      <nav class="nav-menu" aria-label="Main navigation"><ul class="nav-links" id="primary-navigation">{nav_html}<li class="nav-drawer-cta"><a class="button button-small nav-cta-drawer" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book appointment ↗</a></li></ul></nav>
+      <div class="nav-actions">
+        <a class="nav-pill-about" href="{about_href}"{about_active_attr}>About us</a>
+        <a class="button button-small nav-cta" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer"><span class="nav-cta-text-full">Book Appointment</span><span class="nav-cta-text-short">Book</span><span class="nav-cta-arrow" aria-hidden="true"> ↗</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span class="menu-icon" aria-hidden="true"></span></button>
+      </div>
     </div>
-    <a class="button button-small nav-cta nav-cta-desktop" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book appointment ↗</a>
-    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span class="menu-icon" aria-hidden="true"></span></button>
-  </div></header>
+  </header>
   {body}
   {footer(route_dir)}
   {dialog}

@@ -15,7 +15,7 @@ p { text-wrap: pretty; }
 .eyebrow { font-size: .72rem; letter-spacing: .12em; }
 .button { min-height: 48px; line-height: 1.35; font-size: .92rem; }
 .text-link { line-height: 1.5; }
-.nav-links a[aria-current='page']:not(.button) { text-underline-offset: 8px; text-decoration: underline; text-decoration-thickness: 2px; }
+.nav-links a[aria-current='page']:not(.button) { text-decoration: none; }
 .page-hero { padding-block: clamp(40px, 5vw, 68px); }
 .page-hero h1 { font-size: clamp(2.4rem, 4.8vw, 4.1rem); }
 .page-hero-art { height: 240px; max-height: none; }
