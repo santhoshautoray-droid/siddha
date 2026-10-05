@@ -5,6 +5,28 @@ const siteMotionPaused = () => siteMotionQuery.matches || document.documentEleme
 
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.nav-links');
+const siteHeader = document.querySelector('.site-header');
+
+// Keep the navigation out of the way while reading down the page, then restore it
+// as soon as the visitor scrolls back up. The menu always stays visible when open.
+if (siteHeader) {
+  let previousScrollY = Math.max(window.scrollY, 0);
+  let scrollFrame = 0;
+  const updateHeaderVisibility = () => {
+    scrollFrame = 0;
+    const currentScrollY = Math.max(window.scrollY, 0);
+    const menuIsOpen = menuButton?.getAttribute('aria-expanded') === 'true';
+    if (currentScrollY <= 24 || currentScrollY < previousScrollY || menuIsOpen) {
+      siteHeader.classList.remove('header-scroll-hidden');
+    } else if (currentScrollY > previousScrollY) {
+      siteHeader.classList.add('header-scroll-hidden');
+    }
+    previousScrollY = currentScrollY;
+  };
+  window.addEventListener('scroll', () => {
+    if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeaderVisibility);
+  }, { passive: true });
+}
 
 if (menuButton && navigation) {
   const setMenuOpen = (isOpen) => {
@@ -31,7 +53,7 @@ if (menuButton && navigation) {
     }
   });
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1180) setMenuOpen(false);
+    if (window.innerWidth > 1040) setMenuOpen(false);
   });
 }
 

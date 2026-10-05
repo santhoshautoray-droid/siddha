@@ -76,6 +76,8 @@ h3 { margin-bottom: 10px; font-size: 1.18rem; font-weight: 650; }
   border: none;
   transition: transform 0.3s ease, top 0.3s ease;
 }
+.site-header.header-scroll-hidden { transform: translateY(calc(-100% - 24px)); }
+.site-header:has(.nav-links.is-open).header-scroll-hidden { transform: translateY(0); }
 
 .page-home .site-header {
   position: sticky;
