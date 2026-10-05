@@ -13,6 +13,14 @@ const founderSection = document.querySelector('.home-founder-section');
 const introSection = document.querySelector('.home-intro');
 if (founderSection && introSection) introSection.before(founderSection);
 
+const careLabelUpdates = { women: 'Women’s Health Care', skin: 'Skin & Hair' };
+Object.entries(careLabelUpdates).forEach(([key, label]) => {
+  const tab = document.querySelector(`[data-care-tab="${key}"]`);
+  if (tab?.firstChild?.nodeType === Node.TEXT_NODE) tab.firstChild.nodeValue = label;
+  const eyebrow = document.querySelector(`#care-panel-${key} .care-panel-intro .eyebrow`);
+  if (eyebrow?.firstChild?.nodeType === Node.TEXT_NODE) eyebrow.firstChild.nodeValue = label;
+});
+
 // Keep the navigation out of the way while reading down the page, then restore it
 // as soon as the visitor scrolls back up. The menu always stays visible when open.
 if (siteHeader) {

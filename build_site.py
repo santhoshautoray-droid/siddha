@@ -399,8 +399,8 @@ def nasagra_home_section():
 
 def care_explorer():
     categories = [
-        ("women", "Women’s health", "Care through different stages of life", "Explore guides to fertility and menstrual health, and prepare for a conversation about your needs.", ["infertility", "pcod"]),
-        ("skin", "Skin & hair", "Start with understanding your concern", "Find information about skin, hair and foot concerns, with guidance on assessment and next steps.", ["skin-problems", "hair-fall", "corn-foot"]),
+        ("women", "Women’s Health Care", "Care through different stages of life", "Explore guides to fertility and menstrual health, and prepare for a conversation about your needs.", ["infertility", "pcod"]),
+        ("skin", "Skin & Hair", "Start with understanding your concern", "Find information about skin, hair and foot concerns, with guidance on assessment and next steps.", ["skin-problems", "hair-fall", "corn-foot"]),
         ("movement", "Joints & therapies", "Explore comfort, movement and care", "Read about joint concerns and traditional therapies, including what to discuss with your clinician.", ["joint-pain", "kati-vasthi", "fire-cupping", "hijama-cupping"]),
         ("family", "Family & general care", "Information for everyday health questions", "Browse care guides for ongoing concerns and learn when individual assessment or specialist care is needed.", ["diabetes", "weight-management", "sinusitis", "wheezing", "piles", "autism"]),
     ]
