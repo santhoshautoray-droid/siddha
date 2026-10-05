@@ -1298,8 +1298,8 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
 
 /* Clinic marks share one quiet rhythm; the loader keeps its own animation. */
 .clinic-statistics__header .eyebrow::before {
-  width: 31px;
-  height: 31px;
+  width: 46px;
+  height: 46px;
   background: url('../wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png') center / contain no-repeat;
 }
 .brand img,

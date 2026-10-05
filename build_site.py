@@ -25,7 +25,7 @@ WHATSAPP = "https://api.whatsapp.com/send/?phone=917845539622&text=Hello%20Siddh
 GOOGLE_SEARCH = "https://www.google.com/maps/search/?api=1&query=Siddha+365+Health+Care+Clinic+Villivakkam+Chennai"
 GOOGLE_EMBED = "https://maps.google.com/maps?q=Siddha%20365%20Health%20Care%20Clinic%20Villivakkam%20Chennai&output=embed"
 REVIEWS_API = "https://siddha365.com/wp-json/wp/v2/pages/7?_fields=content"
-ASSET_VERSION = "20261005-logo-directions-47"
+ASSET_VERSION = "20261005-milestone-logo-48"
 
 LOGO = "assets/optimized/siddha365-header-lockup.webp"
 FAVICON = "wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png"
