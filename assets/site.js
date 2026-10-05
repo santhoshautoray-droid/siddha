@@ -7,6 +7,12 @@ const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.nav-links');
 const siteHeader = document.querySelector('.site-header');
 
+// Keep the practitioner introduction close to the hero, before the broader
+// traditional-care explanation on the homepage.
+const founderSection = document.querySelector('.home-founder-section');
+const introSection = document.querySelector('.home-intro');
+if (founderSection && introSection) introSection.before(founderSection);
+
 // Keep the navigation out of the way while reading down the page, then restore it
 // as soon as the visitor scrolls back up. The menu always stays visible when open.
 if (siteHeader) {
