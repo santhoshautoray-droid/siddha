@@ -123,7 +123,7 @@ if (statsSection) {
           <p data-story-description>Five years of thoughtful, individual Siddha care.</p>
         </div>
       </div>
-      <ol class="milestone-story__progress" aria-label="Clinic milestones">
+      <ol class="milestone-story__trajectory" aria-label="Clinic growth milestones">
         ${milestones.map((milestone, index) => `<li data-story-index="${index}"${index === 0 ? ' class="is-active"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><small>${milestone.short}</small></li>`).join('')}
       </ol>
       <div class="milestone-story__all-milestones">
@@ -151,7 +151,10 @@ if (statsSection) {
     label.textContent = milestone.label;
     label.hidden = !milestone.label;
     description.textContent = milestone.copy;
-    progressItems.forEach((item, itemIndex) => item.classList.toggle('is-active', itemIndex === index));
+    progressItems.forEach((item, itemIndex) => {
+      item.classList.toggle('is-active', itemIndex === index);
+      item.classList.toggle('is-passed', itemIndex < index);
+    });
   };
 
   const renderMilestone = () => {
