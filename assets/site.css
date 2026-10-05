@@ -1228,3 +1228,62 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
   .milestone-story:not(.milestone-story--static) .milestone-story__copy h2 { margin-bottom: 9px; font-size: clamp(1.22rem, 6vw, 1.65rem); }
   .milestone-story:not(.milestone-story--static) .milestone-story__copy p { max-width: 31ch; font-size: .78rem; }
 }
+
+/* Compact clinic statistics: normal document flow, no pinned scroll story. */
+.home-stats-band.clinic-statistics {
+  position: relative;
+  min-height: 0;
+  padding-block: clamp(44px, 5vw, 64px);
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b110d;
+}
+.home-stats-band.clinic-statistics::before { display: none; }
+.clinic-statistics .home-stats-background {
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  opacity: .09;
+  filter: grayscale(1) saturate(.45);
+  transform: scale(1.04);
+}
+.clinic-statistics__veil { position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, rgba(9, 15, 10, .94), rgba(11, 19, 13, .88), rgba(9, 15, 10, .94)); }
+.clinic-statistics__inner { position: relative; }
+.clinic-statistics__header { padding-bottom: 24px; border-bottom: 1px solid rgba(221, 238, 213, .14); }
+.clinic-statistics__header .eyebrow { margin: 0; font-size: .66rem; }
+.clinic-statistics__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 26px; }
+.clinic-statistic { min-width: 0; position: relative; padding: 5px clamp(18px, 2.4vw, 36px) 8px; opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.clinic-statistic:first-child { padding-left: 0; }
+.clinic-statistic:not(:first-child) { border-left: 1px solid rgba(221, 238, 213, .14); }
+.clinic-statistics.is-revealed .clinic-statistic { opacity: 1; transform: none; transition-delay: calc(var(--stat-index) * 75ms); }
+.clinic-statistic__icon { display: grid; width: 25px; height: 25px; place-items: center; margin-bottom: 14px; color: var(--green); }
+.clinic-statistic__icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.55; }
+.clinic-statistic strong { display: block; color: #f1f4ee; font-family: 'Manrope', 'DM Sans', sans-serif; font-size: clamp(2.3rem, 4vw, 4.1rem); font-variant-numeric: tabular-nums; font-weight: 600; letter-spacing: -.07em; line-height: .96; }
+.clinic-statistic__label { display: block; max-width: 15ch; min-height: 2.8em; margin-top: 13px; color: #d7dfd4; font-size: .72rem; font-weight: 750; letter-spacing: .09em; line-height: 1.4; text-transform: uppercase; }
+.clinic-statistic__line { display: block; width: 30px; height: 1px; margin-top: 15px; background: rgba(167, 216, 112, .72); }
+
+@media (max-width: 900px) {
+  .clinic-statistics__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clinic-statistic { padding: 17px 22px; }
+  .clinic-statistic:first-child { padding-left: 0; }
+  .clinic-statistic:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid rgba(221, 238, 213, .14); }
+  .clinic-statistic:nth-child(4) { border-top: 1px solid rgba(221, 238, 213, .14); }
+}
+@media (max-width: 560px) {
+  .home-stats-band.clinic-statistics { padding-block: 30px 32px; }
+  .clinic-statistics__header { padding-bottom: 16px; }
+  .clinic-statistics__header .eyebrow { font-size: .61rem; }
+  .clinic-statistics__grid { margin-top: 10px; }
+  .clinic-statistic { padding: 15px 15px 14px; }
+  .clinic-statistic:first-child { padding-left: 0; }
+  .clinic-statistic:nth-child(3) { padding-left: 0; }
+  .clinic-statistic__icon { width: 20px; height: 20px; margin-bottom: 8px; }
+  .clinic-statistic__icon svg { width: 16px; height: 16px; }
+  .clinic-statistic strong { font-size: clamp(2rem, 11.3vw, 3rem); }
+  .clinic-statistic__label { min-height: 3.4em; margin-top: 8px; font-size: .59rem; letter-spacing: .055em; line-height: 1.35; }
+  .clinic-statistic__line { width: 20px; margin-top: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clinic-statistic { opacity: 1; transform: none; transition: none; }
+}

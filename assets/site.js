@@ -96,110 +96,60 @@ if ('IntersectionObserver' in window && !siteMotionPaused()) {
 const statsSection = document.querySelector('.home-stats-band');
 if (statsSection) {
   const milestones = [
-    { value: 5, number: '05', short: 'Experience', title: 'Years', label: 'of experience', copy: 'Five years of thoughtful, individual Siddha care.' },
-    { value: 500, number: '500', short: 'Health concerns', title: 'Health concerns', label: 'supported', copy: 'Guidance shaped around the concerns patients bring to us.' },
-    { value: 700, number: '700', short: 'Treatments', title: 'Treatments', label: '', copy: 'Care plans considered with clinical attention and clarity.' },
-    { value: 5000, number: '5,000', short: 'Clients served', title: 'Clients', label: 'served', copy: 'Trusted by thousands of people and families in Chennai.' },
+    { value: 5, label: 'Years of experience', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V6m0 12h16M8 14l4-4 3 3 5-6"/></svg>' },
+    { value: 500, label: 'Health concerns supported', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10Z"/></svg>' },
+    { value: 700, label: 'Treatments', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16M7 7l10 10M17 7 7 17"/></svg>' },
+    { value: 5000, label: 'Clients served', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20c.6-3.5 3-5 7-5s6.4 1.5 7 5"/></svg>' },
   ];
   const background = statsSection.querySelector('.home-stats-background');
   const formatNumber = new Intl.NumberFormat('en-IN');
-  const reduced = siteMotionPaused();
+  const displayNumber = (value) => value === 5 ? '05' : formatNumber.format(value);
 
-  statsSection.classList.add('milestone-story', ...(reduced ? ['milestone-story--static'] : []));
+  statsSection.classList.add('clinic-statistics');
   statsSection.innerHTML = `
     ${background ? background.outerHTML : ''}
-    <div class="milestone-story__veil" aria-hidden="true"></div>
-    <div class="milestone-story__texture" aria-hidden="true"></div>
-    <div class="container milestone-story__sticky">
-      <header class="milestone-story__header">
+    <div class="clinic-statistics__veil" aria-hidden="true"></div>
+    <div class="container clinic-statistics__inner">
+      <header class="clinic-statistics__header">
         <p class="eyebrow">Siddha365 milestones</p>
-        <p class="milestone-story__position"><span data-story-position>01</span><span aria-hidden="true"> / 04</span></p>
       </header>
-      <div class="milestone-story__stage">
-        <p class="milestone-story__chapter" data-story-chapter>Milestone 01</p>
-        <p class="milestone-story__number" data-story-number aria-live="polite" aria-label="5">05</p>
-        <div class="milestone-story__copy" data-story-copy>
-          <h2><span data-story-title>Years</span><em data-story-label>of experience</em></h2>
-          <p data-story-description>Five years of thoughtful, individual Siddha care.</p>
-        </div>
-      </div>
-      <ol class="milestone-story__trajectory" aria-label="Clinic growth milestones">
-        ${milestones.map((milestone, index) => `<li data-story-index="${index}"${index === 0 ? ' class="is-active"' : ''}><span>${String(index + 1).padStart(2, '0')}</span><small>${milestone.short}</small></li>`).join('')}
-      </ol>
-      <div class="milestone-story__all-milestones">
-        ${milestones.map((milestone) => `<article><strong>${milestone.value === 5000 ? '5,000' : milestone.value}</strong><span>${milestone.title} ${milestone.label}</span></article>`).join('')}
+      <div class="clinic-statistics__grid" aria-label="Siddha365 clinic statistics">
+        ${milestones.map((milestone, index) => `<article class="clinic-statistic" style="--stat-index:${index}"><span class="clinic-statistic__icon">${milestone.icon}</span><strong data-stat-count="${milestone.value}" aria-label="${displayNumber(milestone.value)} ${milestone.label}">${displayNumber(milestone.value)}</strong><span class="clinic-statistic__label">${milestone.label}</span><span class="clinic-statistic__line" aria-hidden="true"></span></article>`).join('')}
       </div>
     </div>`;
-
-  const position = statsSection.querySelector('[data-story-position]');
-  const number = statsSection.querySelector('[data-story-number]');
-  const chapter = statsSection.querySelector('[data-story-chapter]');
-  const title = statsSection.querySelector('[data-story-title]');
-  const label = statsSection.querySelector('[data-story-label]');
-  const description = statsSection.querySelector('[data-story-description]');
-  const progressItems = [...statsSection.querySelectorAll('[data-story-index]')];
-  let activeIndex = -1;
-  let pendingFrame = 0;
-
-  const updateStoryText = (index) => {
-    if (index === activeIndex) return;
-    activeIndex = index;
-    const milestone = milestones[index];
-    position.textContent = String(index + 1).padStart(2, '0');
-    chapter.textContent = `Milestone ${String(index + 1).padStart(2, '0')}`;
-    title.textContent = milestone.title;
-    label.textContent = milestone.label;
-    label.hidden = !milestone.label;
-    description.textContent = milestone.copy;
-    progressItems.forEach((item, itemIndex) => {
-      item.classList.toggle('is-active', itemIndex === index);
-      item.classList.toggle('is-passed', itemIndex < index);
+  const counters = [...statsSection.querySelectorAll('[data-stat-count]')];
+  const finishCounters = () => counters.forEach((counter) => { counter.textContent = displayNumber(Number(counter.dataset.statCount)); });
+  const animateCounters = () => {
+    if (statsSection.dataset.counted === 'true') return;
+    statsSection.dataset.counted = 'true';
+    statsSection.classList.add('is-revealed');
+    if (siteMotionPaused()) return finishCounters();
+    counters.forEach((counter, index) => {
+      const target = Number(counter.dataset.statCount);
+      const startedAt = performance.now() + (index * 80);
+      const duration = 760;
+      const update = (now) => {
+        if (now < startedAt) return requestAnimationFrame(update);
+        const progress = Math.min(1, (now - startedAt) / duration);
+        const eased = 1 - ((1 - progress) ** 3);
+        const value = Math.round(target * eased);
+        counter.textContent = value < 10 ? String(value).padStart(2, '0') : formatNumber.format(value);
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
     });
   };
 
-  const renderMilestone = () => {
-    pendingFrame = 0;
-    if (reduced) {
-      updateStoryText(0);
-      number.textContent = milestones[0].number;
-      number.setAttribute('aria-label', '5 years of experience');
-      return;
-    }
-    const bounds = statsSection.getBoundingClientRect();
-    const available = Math.max(statsSection.offsetHeight - window.innerHeight, 1);
-    const progress = Math.min(1, Math.max(0, -bounds.top / available));
-    const stage = progress * (milestones.length - 1);
-    const baseIndex = Math.min(milestones.length - 1, Math.floor(stage));
-    const nextIndex = Math.min(milestones.length - 1, baseIndex + 1);
-    const local = stage - baseIndex;
-    const eased = local * local * (3 - (2 * local));
-    const interpolated = milestones[baseIndex].value + ((milestones[nextIndex].value - milestones[baseIndex].value) * eased);
-    const displayValue = baseIndex === 0 && nextIndex === 1 && progress < .165
-      ? Math.min(5, Math.max(1, Math.round(1 + (progress / .165) * 4)))
-      : Math.round(interpolated);
-    const nearestIndex = Math.min(milestones.length - 1, Math.round(stage));
-    const numberText = displayValue < 10 && nearestIndex === 0 ? String(displayValue).padStart(2, '0') : formatNumber.format(displayValue);
-
-    updateStoryText(nearestIndex);
-    number.textContent = numberText;
-    number.setAttribute('aria-label', `${formatNumber.format(displayValue)} ${milestones[nearestIndex].short}`);
-    statsSection.style.setProperty('--story-progress', progress.toFixed(4));
-    statsSection.style.setProperty('--story-stage-progress', local.toFixed(4));
-    statsSection.style.setProperty('--story-next-strength', eased.toFixed(4));
-  };
-
-  const requestStoryRender = () => {
-    if (!pendingFrame) pendingFrame = window.requestAnimationFrame(renderMilestone);
-  };
-
-  updateStoryText(0);
-  if (reduced) {
-    number.textContent = milestones[0].number;
-    number.setAttribute('aria-label', '5 years of experience');
+  if (siteMotionPaused() || !('IntersectionObserver' in window)) {
+    statsSection.classList.add('is-revealed');
+    finishCounters();
   } else {
-    window.addEventListener('scroll', requestStoryRender, { passive: true });
-    window.addEventListener('resize', requestStoryRender, { passive: true });
-    renderMilestone();
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      animateCounters();
+    }, { threshold: .3 });
+    observer.observe(statsSection);
   }
 }
 
