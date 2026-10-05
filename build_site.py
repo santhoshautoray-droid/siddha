@@ -21,7 +21,7 @@ WHATSAPP = "https://api.whatsapp.com/send/?phone=917845539622&text=Hello%20Siddh
 GOOGLE_SEARCH = "https://www.google.com/maps/search/?api=1&query=Siddha+365+Health+Care+Clinic+Villivakkam+Chennai"
 GOOGLE_EMBED = "https://maps.google.com/maps?q=Siddha%20365%20Health%20Care%20Clinic%20Villivakkam%20Chennai&output=embed"
 REVIEWS_API = "https://siddha365.com/wp-json/wp/v2/pages/7?_fields=content"
-ASSET_VERSION = "20261005-responsive-audit-34"
+ASSET_VERSION = "20261005-floating-navbar-35"
 
 LOGO = "assets/optimized/siddha365-header-lockup.webp"
 FAVICON = "wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png"
@@ -296,9 +296,11 @@ def page_shell(route, title, description, body, *, homepage=False, section=""):
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="utility-bar"><div class="container utility-inner"><p>Traditional Siddha care · Chennai</p><div class="utility-actions"><p><a href="{tel}">Call {PHONE}</a><span class="utility-hours"><span aria-hidden="true"> &nbsp;·&nbsp; </span>Mon–Sat, 10:30 am–1:30 pm &amp; 7–9:30 pm</span></p><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">Pause motion</button></div></div></div>
   <header class="site-header"><div class="container nav-wrap">
-    <a class="brand" href="{rel(route_dir, '')}" aria-label="Siddha365 home"><img src="{logo}" alt="Siddha 365 Health Care Clinic"></a>
+    <div class="nav-shell"><a class="brand" href="{rel(route_dir, '')}" aria-label="Siddha365 home"><img src="{logo}" alt="Siddha 365 Health Care Clinic"></a>
+      <nav aria-label="Main navigation"><ul class="nav-links" id="primary-navigation">{nav_html}<li><a class="button button-small nav-cta" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book appointment ↗</a></li></ul></nav>
+    </div>
+    <a class="button button-small nav-cta nav-cta-desktop" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book appointment ↗</a>
     <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation"><span class="menu-icon" aria-hidden="true"></span></button>
-    <nav aria-label="Main navigation"><ul class="nav-links" id="primary-navigation">{nav_html}<li><a class="button button-small nav-cta" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book appointment ↗</a></li></ul></nav>
   </div></header>
   {body}
   {footer(route_dir)}
