@@ -962,7 +962,7 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
   --story-stage-progress: 0;
   --story-next-strength: 0;
   position: relative;
-  min-height: 360vh;
+  min-height: 230vh;
   padding: 0;
   overflow: clip;
   isolation: isolate;
@@ -998,8 +998,8 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
   display: grid;
   grid-template-columns: minmax(155px, .45fr) minmax(0, 1.7fr) minmax(190px, .55fr);
   grid-template-rows: auto 1fr auto;
-  min-height: 100svh;
-  padding-block: clamp(52px, 8vh, 90px) clamp(34px, 6vh, 64px);
+  min-height: min(86svh, 780px);
+  padding-block: clamp(34px, 5vh, 58px) clamp(24px, 4vh, 46px);
   position: sticky;
   top: 0;
 }
@@ -1007,15 +1007,15 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
 .milestone-story__header .eyebrow { color: #b6e97f; }
 .milestone-story__position { margin: 0; color: rgba(237, 245, 232, .62); font: 600 .78rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .1em; }
 .milestone-story__position span:first-child { color: var(--green); }
-.milestone-story__stage { grid-column: 2; align-self: center; position: relative; max-width: 650px; padding-block: 36px; }
-.milestone-story__chapter { margin: 0 0 clamp(14px, 2vw, 24px); color: #b6e97f; font-size: .7rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.milestone-story__stage { grid-column: 2; align-self: center; position: relative; max-width: 560px; padding-block: 20px; }
+.milestone-story__chapter { margin: 0 0 clamp(10px, 1.5vw, 16px); color: #b6e97f; font-size: .67rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .milestone-story__number {
   width: max-content;
   max-width: 100%;
   margin: 0;
   color: #f2f5ed;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(7rem, 19vw, 17rem);
+  font-size: clamp(5.8rem, 14vw, 12.5rem);
   font-variant-numeric: tabular-nums;
   font-weight: 650;
   letter-spacing: -.12em;
@@ -1025,12 +1025,12 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
   transform-origin: left center;
   transition: color .25s ease;
 }
-.milestone-story__copy { margin-top: clamp(30px, 5vh, 58px); padding-left: 2px; border-left: 1px solid rgba(181, 234, 125, .58); }
-.milestone-story__copy h2 { max-width: 440px; margin: 0 0 12px; padding-left: 20px; color: #f4f7f1; font-size: clamp(1.65rem, 3.2vw, 3.25rem); }
+.milestone-story__copy { margin-top: clamp(22px, 3vh, 38px); padding-left: 2px; border-left: 1px solid rgba(181, 234, 125, .58); }
+.milestone-story__copy h2 { max-width: 440px; margin: 0 0 9px; padding-left: 16px; color: #f4f7f1; font-size: clamp(1.5rem, 2.65vw, 2.5rem); }
 .milestone-story__copy h2 span, .milestone-story__copy h2 em { display: block; }
 .milestone-story__copy h2 em { color: var(--green); font-style: normal; }
 .milestone-story__copy h2 em[hidden] { display: none; }
-.milestone-story__copy p { max-width: 360px; margin: 0; padding-left: 20px; color: #c4d0c3; font-size: .96rem; }
+.milestone-story__copy p { max-width: 340px; margin: 0; padding-left: 16px; color: #c4d0c3; font-size: .88rem; }
 .milestone-story__progress { grid-column: 3; align-self: center; justify-self: end; width: min(100%, 205px); margin: 0; padding: 0; list-style: none; }
 .milestone-story__progress li { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 10px; min-height: 45px; position: relative; color: rgba(225, 237, 222, .4); font: 600 .67rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .075em; text-transform: uppercase; transition: color .28s ease, transform .28s ease; }
 .milestone-story__progress li:not(:last-child)::after { position: absolute; top: 29px; bottom: -15px; left: 10px; width: 1px; background: rgba(202, 229, 190, .18); content: ''; }
@@ -1052,16 +1052,17 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
 .milestone-story--static .milestone-story__all-milestones span { margin-top: 11px; color: #eaf0e7; font-size: .78rem; font-weight: 700; letter-spacing: .08em; line-height: 1.4; text-transform: uppercase; }
 
 @media (max-width: 760px) {
-  .home-stats-band.milestone-story { min-height: 290vh; }
-  .milestone-story__sticky { display: flex; flex-direction: column; min-height: 100svh; padding-top: clamp(38px, 7vh, 62px); padding-bottom: 30px; }
+  .home-stats-band.milestone-story { min-height: 185vh; }
+  .milestone-story__sticky { display: flex; flex-direction: column; min-height: 82svh; padding-top: 28px; padding-bottom: 22px; }
   .milestone-story__header { width: 100%; }
-  .milestone-story__stage { width: 100%; max-width: none; margin-block: auto; padding-block: 20px; }
-  .milestone-story__number { font-size: clamp(6.8rem, 31vw, 10.5rem); }
-  .milestone-story__copy { margin-top: 34px; }
-  .milestone-story__copy h2 { font-size: clamp(1.7rem, 8.7vw, 2.45rem); }
-  .milestone-story__copy p { max-width: 300px; font-size: .9rem; }
+  .milestone-story__stage { width: 100%; max-width: none; margin-block: auto; padding-block: 12px; }
+  .milestone-story__chapter { margin-bottom: 10px; font-size: .6rem; }
+  .milestone-story__number { font-size: clamp(4.7rem, 23vw, 7.5rem); }
+  .milestone-story__copy { margin-top: 20px; }
+  .milestone-story__copy h2 { margin-bottom: 7px; padding-left: 13px; font-size: clamp(1.35rem, 7vw, 2rem); }
+  .milestone-story__copy p { max-width: 280px; padding-left: 13px; font-size: .8rem; line-height: 1.5; }
   .milestone-story__progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; width: 100%; }
-  .milestone-story__progress li { display: block; min-height: 0; color: rgba(225, 237, 222, .52); font-size: .62rem; }
+  .milestone-story__progress li { display: block; min-height: 0; color: rgba(225, 237, 222, .52); font-size: .58rem; }
   .milestone-story__progress li:not(:last-child)::after { top: 8px; right: -5px; bottom: auto; left: auto; width: 7px; height: 1px; }
   .milestone-story__progress li small { display: none; }
   .milestone-story__progress li.is-active { transform: none; color: #c0f083; }
