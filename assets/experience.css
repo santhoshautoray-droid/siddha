@@ -42,7 +42,7 @@
 /* Homepage media stage: one moving image field with the clinic content and videos above it. */
 .home-gallery-section { padding: 0; background: #081009; }
 .home-gallery-section > .container { width: 100%; max-width: none; margin: 0; padding: 0; }
-.home-hero-stage { position: relative; min-height: clamp(610px,calc(100svh - 116px),780px); overflow: hidden; border: 0; border-radius: 0; isolation: isolate; background: #0d1710; box-shadow: none; }
+.home-hero-stage { position: relative; min-height: clamp(690px,calc(100svh - 116px),780px); overflow: hidden; border: 0; border-radius: 0; isolation: isolate; background: #0d1710; box-shadow: none; }
 .home-hero-stage .home-gallery { position: absolute; z-index: -3; inset: 0; display: block; overflow: hidden; border: 0; border-radius: 0; background: transparent; }
 .home-hero-stage .home-gallery-track { height: 100%; gap: 0; border-radius: 0; scroll-snap-type: x mandatory; }
 .home-hero-stage .home-slide { height: 100%; min-height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; background: #101a12; }
@@ -51,16 +51,13 @@
 .home-stage-shade { position: absolute; z-index: -2; inset: 0; pointer-events: none; background: linear-gradient(90deg,#071007e8 0%,#0b1509c2 36%,#0a100c4d 67%,#050b07bd 100%), linear-gradient(0deg,#071008aa 0%,transparent 52%); }
 .home-hero-stage .home-gallery-controls { top: auto; right: 26px; bottom: 25px; left: auto; width: auto; gap: 9px; transform: none; }
 .home-hero-stage .home-gallery-controls .icon-button { width: 39px; height: 39px; background: #0710089e; border-color: #d6f2c44d; }
-.home-stage-copy { position: relative; z-index: 1; display: flex; max-width: min(600px,55%); min-height: clamp(610px,calc(100svh - 116px),780px); padding: clamp(42px,6vw,88px) 0 clamp(76px,7vw,96px) clamp(28px,7.5vw,132px); flex-direction: column; justify-content: center; align-items: flex-start; }
+.home-stage-copy { position: relative; z-index: 1; display: flex; max-width: min(600px,55%); min-height: clamp(690px,calc(100svh - 116px),780px); padding: clamp(42px,6vw,88px) 0 clamp(76px,7vw,96px) clamp(28px,7.5vw,132px); flex-direction: column; justify-content: center; align-items: flex-start; }
 .home-stage-copy h1 { max-width: 11ch; margin: 14px 0 19px; font-size: clamp(2.45rem,5vw,4.6rem); line-height: 1.02; letter-spacing: -.055em; text-wrap: balance; }
 .home-stage-copy > p:last-of-type { max-width: 45ch; margin: 0; color: #e1e9dc; font-size: clamp(.95rem,1.35vw,1.08rem); line-height: 1.75; }
 .home-stage-copy .home-hero-actions { margin: 25px 0 21px; }
 .home-stage-copy .home-hero-details { color: #d2dfcd; }
-.home-stage-videos { position: absolute; z-index: 2; top: 50%; right: clamp(20px,3vw,42px); width: clamp(250px,21vw,320px); height: clamp(410px,38vw,540px); padding: 0; transform: translateY(-50%); border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
-.home-stage-videos .home-video-rail-head { justify-content: flex-end; margin-bottom: 10px; }
-.home-stage-videos .home-video-rail-head > div { display: none; }
-.home-stage-videos .home-video-rail-head .text-link { display: grid; width: 42px; height: 29px; padding: 0; place-items: center; overflow: hidden; border-radius: 8px; background: #e90932; color: #fff; font-size: 0; }
-.home-stage-videos .home-video-rail-head .text-link::before { content: '▶'; padding-left: 2px; font-size: .75rem; }
+.home-stage-videos { position: absolute; z-index: 2; top: 50%; right: clamp(20px,3vw,42px); width: clamp(220px,17.5vw,250px); height: 650px; padding: 0; transform: translateY(-50%); border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
+.home-stage-videos .home-video-rail-head { display: none; }
 .home-stage-videos .home-video-rail-window { overflow: hidden; }
 .home-stage-videos .home-video-card { display: block; min-height: 0; padding: 7px; border: 1px solid #d9ecc938; border-radius: 18px; background: #0710088f; box-shadow: 0 12px 28px #00000042; }
 .home-stage-videos .home-video-card p { display: none; }
@@ -185,11 +182,11 @@
   .care-panel { gap: 22px; }
 }
 @media (max-width: 800px) {
-  .home-hero-stage { min-height: 720px; }
+  .home-hero-stage { min-height: 780px; }
   .home-stage-copy { max-width: 620px; min-height: 0; padding: 48px 28px 16px; }
   .home-stage-copy h1 { max-width: 12ch; font-size: clamp(2.5rem,8.5vw,3.75rem); }
-  .home-stage-videos { top: auto; right: 22px; bottom: 20px; left: auto; width: 250px; height: 330px; transform: none; }
-  .home-hero-stage .home-gallery-controls { right: 295px; bottom: 28px; }
+  .home-stage-videos { top: auto; right: 22px; bottom: 20px; left: auto; width: 210px; height: 565px; transform: none; }
+  .home-hero-stage .home-gallery-controls { right: 254px; bottom: 28px; }
 }
 @media (max-width: 600px) {
   .utility-inner { justify-content: space-between; }
@@ -209,13 +206,13 @@
   .journey-link { align-self: stretch; }
   .home-gallery-layout { gap: 22px; }
   .home-video-rail { height: 391px; }
-  .home-hero-stage { min-height: 690px; }
+  .home-hero-stage { min-height: 720px; }
   .home-stage-copy { padding: 37px 20px 14px; }
   .home-stage-copy h1 { max-width: 11ch; font-size: clamp(2.3rem,10vw,3.1rem); }
   .home-stage-copy .home-hero-actions { margin-block: 20px 17px; }
-  .home-stage-videos { right: 14px; bottom: 14px; left: auto; width: 208px; height: 270px; }
+  .home-stage-videos { right: 14px; bottom: 14px; left: auto; width: 160px; height: 455px; }
   .home-stage-videos .home-video-poster { border-radius: 10px; }
-  .home-hero-stage .home-gallery-controls { right: 238px; bottom: 24px; }
+  .home-hero-stage .home-gallery-controls { right: 194px; bottom: 24px; }
   .care-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 6px; gap: 5px; }
   .care-tabs button { min-height: 47px; padding-inline: 12px; font-size: .76rem; }
   .care-panel { grid-template-columns: 1fr; gap: 24px; padding: 18px; }
