@@ -13,7 +13,7 @@ const founderSection = document.querySelector('.home-founder-section');
 const introSection = document.querySelector('.home-intro');
 if (founderSection && introSection) introSection.before(founderSection);
 
-const careLabelUpdates = { women: 'Women’s Health Care', skin: 'Skin & Hair' };
+const careLabelUpdates = { women: 'Women’s Health Care', skin: 'Skin & Hair', movement: 'Joints & Cupping Therapy', family: 'Family & Child Care' };
 Object.entries(careLabelUpdates).forEach(([key, label]) => {
   const tab = document.querySelector(`[data-care-tab="${key}"]`);
   if (tab?.firstChild?.nodeType === Node.TEXT_NODE) tab.firstChild.nodeValue = label;
