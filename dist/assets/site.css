@@ -1318,3 +1318,42 @@ body { background: radial-gradient(ellipse at 50% -12%, rgba(58, 96, 56, .12), t
   .partner-logo img,
   .review-feed-placeholder > img { animation: none; }
 }
+
+/* The tree rises first, followed by the wordmark dropping into view. */
+.site-header .brand { position: relative; }
+.site-header .brand::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 38px;
+  background: url('../assets/optimized/siddha365-header-lockup.webp') left center / auto 38px no-repeat;
+  content: '';
+  animation: clinic-tree-rise 4.8s cubic-bezier(.22, .8, .2, 1) infinite;
+}
+.site-header .brand img {
+  animation: clinic-wordmark-drop 4.8s cubic-bezier(.22, .8, .2, 1) infinite;
+  clip-path: inset(0 0 0 38px);
+  transform-origin: center top;
+}
+.clinic-statistics__header .eyebrow::before { animation: clinic-tree-rise 4.8s cubic-bezier(.22, .8, .2, 1) infinite; }
+.partner-logo img,
+.review-feed-placeholder > img,
+.footer-brand .brand img { animation: clinic-wordmark-drop 4.8s cubic-bezier(.22, .8, .2, 1) infinite; transform-origin: center top; }
+@keyframes clinic-tree-rise {
+  0%, 8% { clip-path: inset(100% 0 0 0); opacity: 0; transform: translateY(10px) scale(.86); }
+  27%, 100% { clip-path: inset(0 0 0 0); opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes clinic-wordmark-drop {
+  0%, 25% { clip-path: inset(0 0 100% 0); opacity: 0; transform: translateY(-7px); }
+  48%, 100% { clip-path: inset(0 0 0 0); opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .brand::before,
+  .clinic-statistics__header .eyebrow::before,
+  .site-header .brand img,
+  .partner-logo img,
+  .review-feed-placeholder > img,
+  .footer-brand .brand img { animation: none; }
+}
