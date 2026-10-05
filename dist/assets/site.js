@@ -166,15 +166,16 @@ document.querySelectorAll('[data-video-rail]').forEach((rail) => {
   const cards = [...track.children];
   if (cards.length < 2) return;
 
-  cards.forEach((card) => {
+  const clones = cards.map((card) => {
     const clone = card.cloneNode(true);
     clone.classList.add('is-duplicate');
     clone.setAttribute('aria-hidden', 'true');
     clone.querySelectorAll('button').forEach((button) => { button.tabIndex = -1; });
-    track.append(clone);
+    return clone;
   });
+  track.prepend(...clones);
 
-  let activeIndex = 0;
+  let activeIndex = cards.length;
   let inView = !('IntersectionObserver' in window);
   let hovered = false;
   let focused = false;
@@ -191,16 +192,16 @@ document.querySelectorAll('[data-video-rail]').forEach((rail) => {
 
   const advance = () => {
     if (document.hidden || !inView || hovered || focused || siteMotionPaused() || document.querySelector('dialog[open]')) return;
-    activeIndex += 1;
+    activeIndex -= 1;
     track.classList.add('is-moving');
     track.style.transform = `translateY(${-stepSize() * activeIndex}px)`;
   };
 
   track.addEventListener('transitionend', (event) => {
-    if (event.propertyName !== 'transform' || activeIndex < cards.length) return;
+    if (event.propertyName !== 'transform' || activeIndex > 0) return;
     track.classList.remove('is-moving');
-    track.style.transform = 'translateY(0)';
-    activeIndex = 0;
+    activeIndex = cards.length;
+    track.style.transform = `translateY(${-stepSize() * activeIndex}px)`;
     track.offsetHeight;
   });
 
@@ -214,8 +215,8 @@ document.querySelectorAll('[data-video-rail]').forEach((rail) => {
     const paused = siteMotionPaused();
     rail.classList.toggle('is-static', paused);
     track.classList.remove('is-moving');
-    track.style.transform = 'translateY(0)';
-    activeIndex = 0;
+    activeIndex = paused ? 0 : cards.length;
+    track.style.transform = paused ? 'translateY(0)' : `translateY(${-stepSize() * activeIndex}px)`;
     track.querySelectorAll('.is-duplicate').forEach((clone) => { clone.hidden = paused; });
   };
   document.addEventListener('siddha:motionchange', syncRailMotion);
