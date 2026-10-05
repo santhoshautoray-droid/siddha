@@ -758,6 +758,19 @@ h3 { margin-bottom: 10px; font-size: 1.18rem; font-weight: 650; }
   .home-video-rail-track.is-moving { transition: none; }
 }
 
+/* Let the navigation settle into place once when a page opens. */
+@keyframes navbar-rise-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.site-header .nav-shell,
+.site-header .nav-cta-desktop { animation: navbar-rise-in .68s cubic-bezier(.2,.75,.25,1) both; }
+.site-header .nav-cta-desktop { animation-delay: .08s; }
+@media (prefers-reduced-motion: reduce) {
+  .site-header .nav-shell,
+  .site-header .nav-cta-desktop { animation: none; }
+}
+
 /* Brand polish: stronger hierarchy, calmer contrast, and consistent card depth. */
 :root {
   --bg: #0a100d;
