@@ -22,6 +22,7 @@
 .hero-orbit { position: absolute; z-index: -1; top: 24px; left: 36%; width: 590px; height: 590px; border: 1px solid #a9dc730b; border-radius: 50%; pointer-events: none; }
 .hero-orbit::after { content: ''; position: absolute; inset: 38px; border: 1px solid #a9dc730a; border-radius: 50%; }
 .home-gallery-head { gap: 28px; margin-bottom: 28px; align-items: stretch; }
+.home-gallery-head:has(> .home-hero-copy:only-child) { grid-template-columns: minmax(0, 1fr); }
 .home-gallery-head .home-hero-copy { align-self: center; padding-right: 24px; }
 .home-gallery-head .home-hero-copy h1 { margin: 15px 0 19px; letter-spacing: -.045em; line-height: 1.08; font-size: clamp(2.6rem,4.35vw,4rem); }
 .home-hero-copy .eyebrow { font-size: .7rem; }
