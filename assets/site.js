@@ -1,4 +1,31 @@
 document.documentElement.classList.remove('no-js');
+document.querySelector('.home-nasagra-section')?.remove();
+
+// Official partner destinations, shared by every page's footer.
+const partnerWebsites = {
+  'IMPCOPS': 'https://impcops.org.in/',
+  'SKM Siddha': 'https://www.skmsiddha.com/',
+  'Nagarjuna Herbal Concentrates': 'https://www.nagarjunaayurveda.com/',
+  'Tampcol': 'https://www.tampcol.in/',
+  'Dabur': 'https://www.dabur.com/',
+  'Dr Siva': 'https://www.ayushbuy.com/',
+  'Himalaya': 'https://himalayawellness.in/',
+  'Vasu': 'https://www.vasuhealthcare.com/',
+};
+document.querySelectorAll('.partner-logo').forEach((box) => {
+  const logo = box.querySelector('img');
+  const destination = logo && partnerWebsites[logo.alt];
+  if (!destination) return;
+  const link = document.createElement('a');
+  link.className = box.className;
+  link.href = destination;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.setAttribute('aria-label', logo.alt + ' official website (opens in a new tab)');
+  if (box.closest('[aria-hidden="true"]')) link.tabIndex = -1;
+  link.append(...box.childNodes);
+  box.replaceWith(link);
+});
 
 const siteMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const siteMotionPaused = () => siteMotionQuery.matches || document.documentElement.classList.contains('motion-paused');
