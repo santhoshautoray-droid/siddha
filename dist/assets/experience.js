@@ -7,6 +7,27 @@
   let userPaused = false;
   try { userPaused = sessionStorage.getItem(preferenceKey) === 'true'; } catch (_) { /* Preferences are optional. */ }
   const motionPaused = () => userPaused || reducedMotion.matches;
+  document.querySelectorAll('[data-treatment-wall]').forEach((wall) => {
+    const rows = [...wall.querySelectorAll('[data-treatment-row]')];
+    let visible = false;
+    let frame = 0;
+    const render = () => {
+      frame = 0;
+      const bounds = wall.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (innerHeight - bounds.top) / (innerHeight + bounds.height)));
+      const travel = innerWidth <= 600 ? 130 : 280;
+      rows.forEach((row, index) => {
+        const offset = motionPaused() ? -180 : -180 + (index % 2 ? -1 : 1) * (progress - .5) * travel;
+        row.style.transform = `translate3d(${offset.toFixed(2)}px,0,0)`;
+      });
+    };
+    const schedule = () => { if (visible && !frame) frame = requestAnimationFrame(render); };
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) schedule(); }).observe(wall);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    document.addEventListener('siddha:motionchange', render);
+    reducedMotion.addEventListener('change', render);
+  });
   const motionButtons = [...document.querySelectorAll('[data-motion-toggle]')];
 
   const applyMotionPreference = () => {

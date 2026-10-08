@@ -1,5 +1,17 @@
 /* A consistent interaction layer for the clinic's static pages. */
 :root { --ease-care: cubic-bezier(.22,.7,.25,1); }
+.treatment-wall { position: relative; overflow: hidden; padding: 32px 0; border-block: 1px solid #a9dc7320; background: #0d1c15; isolation: isolate; }
+.treatment-wall-rows { display: grid; gap: 16px; }
+.treatment-wall-row { display: flex; gap: 14px; width: max-content; transform: translate3d(-180px,0,0); }
+.treatment-wall-pill { display: inline-flex; align-items: center; flex: none; min-height: 38px; padding: 8px 20px; border: 1px solid #b6d1ba45; border-radius: 999px; color: #d5e2d4; font-size: .76rem; white-space: nowrap; }
+.treatment-wall-center { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; background: radial-gradient(ellipse at center,#0d1c15 0%,#0d1c15c9 14%,transparent 43%); }
+.treatment-wall-cta { pointer-events: auto; text-align: center; padding: 22px 34px; min-height: 96px; border-radius: 999px; font-size: 1rem; line-height: 1.45; box-shadow: 0 8px 30px #0003; }
+@media (max-width: 600px) {
+  .treatment-wall { padding-block: 24px; }
+  .treatment-wall-rows { gap: 12px; }
+  .treatment-wall-pill { min-height: 34px; padding: 7px 15px; font-size: .69rem; }
+  .treatment-wall-cta { min-height: 84px; padding: 17px 25px; font-size: .88rem; }
+}
 :focus-visible { outline: 2px solid #c2ed92; outline-offset: 5px; }
 .button:active, .icon-button:active { transform: scale(.97); }
 .button, .icon-button, .text-link { -webkit-tap-highlight-color: transparent; }
@@ -10,10 +22,10 @@
 .motion-toggle::before { content: 'Ⅱ'; color: var(--green); font-size: .8rem; }
 .motion-toggle[aria-pressed='true']::before { content: '▷'; }
 .motion-toggle:hover { color: var(--green); }
-.site-header { box-shadow: 0 5px 25px #00000012; }
-.nav-links a:not(.button) { position: relative; }
-.nav-links a[aria-current='page']:not(.button) { text-decoration: none; }
-.nav-links a[aria-current='page']:not(.button)::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 18px; height: 2px; background: var(--green); border-radius: 3px; }
+@media (min-width: 1041px) {
+  .nav-links a:not(.button) { position: relative; }
+  .nav-links a[aria-current='page']:not(.button) { text-decoration: none; }
+}
 
 /* Soft botanical light stays behind content and never delays reading. */
 .home-gallery-section { position: relative; isolation: isolate; overflow: hidden; padding: 42px 0 36px; background: linear-gradient(140deg,#111d15 0%,#0a110d 53%,#101b13 100%); }
@@ -42,21 +54,21 @@
 /* Homepage media stage: one moving image field with the clinic content and videos above it. */
 .home-gallery-section { padding: 0; background: #081009; }
 .home-gallery-section > .container { width: 100%; max-width: none; margin: 0; padding: 0; }
-.home-hero-stage { position: relative; min-height: clamp(690px,calc(100svh - 116px),780px); overflow: hidden; border: 0; border-radius: 0; isolation: isolate; background: #0d1710; box-shadow: none; }
+.home-hero-stage { position: relative; min-height: max(680px, calc(100svh - 42px)); height: max(680px, calc(100svh - 42px)); overflow: hidden; border: 0; border-radius: 0; isolation: isolate; background: #0d1710; box-shadow: none; }
 .home-hero-stage .home-gallery { position: absolute; z-index: -3; inset: 0; display: block; overflow: hidden; border: 0; border-radius: 0; background: transparent; }
-.home-hero-stage .home-gallery-track { height: 100%; gap: 0; border-radius: 0; scroll-snap-type: x mandatory; }
+.home-hero-stage .home-gallery-track { height: 100%; gap: 0; border-radius: 0; scroll-snap-type: x mandatory; scroll-behavior: smooth; }
 .home-hero-stage .home-slide { height: 100%; min-height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; background: #101a12; }
-.home-hero-stage .home-slide-image { transform: none; filter: saturate(.78) brightness(.59); }
+.home-hero-stage .home-slide-image { transform: none; filter: brightness(1.06) saturate(1.03); object-fit: cover; object-position: center center; }
 .home-hero-stage .home-slide:hover .home-slide-image { transform: none; }
-.home-stage-shade { position: absolute; z-index: -2; inset: 0; pointer-events: none; background: linear-gradient(90deg,#071007e8 0%,#0b1509c2 36%,#0a100c4d 67%,#050b07bd 100%), linear-gradient(0deg,#071008aa 0%,transparent 52%); }
+.home-stage-shade { position: absolute; z-index: -2; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(7, 16, 7, 0.90) 0%, rgba(11, 21, 9, 0.65) 32%, rgba(10, 16, 12, 0.16) 56%, transparent 76%), linear-gradient(0deg, rgba(7, 16, 8, 0.6) 0%, transparent 35%); }
 .home-hero-stage .home-gallery-controls { top: auto; right: 26px; bottom: 25px; left: auto; width: auto; gap: 9px; transform: none; }
 .home-hero-stage .home-gallery-controls .icon-button { width: 39px; height: 39px; background: #0710089e; border-color: #d6f2c44d; }
-.home-stage-copy { position: relative; z-index: 1; display: flex; max-width: min(600px,55%); min-height: clamp(690px,calc(100svh - 116px),780px); padding: clamp(42px,6vw,88px) 0 clamp(76px,7vw,96px) clamp(28px,7.5vw,132px); flex-direction: column; justify-content: center; align-items: flex-start; }
+.home-stage-copy { position: relative; z-index: 1; display: flex; max-width: min(600px,55%); min-height: max(680px, calc(100svh - 42px)); height: 100%; padding: clamp(42px,6vw,88px) 0 clamp(76px,7vw,96px) clamp(28px,7.5vw,132px); flex-direction: column; justify-content: center; align-items: flex-start; }
 .home-stage-copy h1 { max-width: 11ch; margin: 14px 0 19px; font-size: clamp(2.45rem,5vw,4.6rem); line-height: 1.02; letter-spacing: -.055em; text-wrap: balance; }
 .home-stage-copy > p:last-of-type { max-width: 45ch; margin: 0; color: #e1e9dc; font-size: clamp(.95rem,1.35vw,1.08rem); line-height: 1.75; }
 .home-stage-copy .home-hero-actions { margin: 25px 0 21px; }
 .home-stage-copy .home-hero-details { color: #d2dfcd; }
-.home-stage-videos { position: absolute; z-index: 2; top: 50%; right: clamp(20px,3vw,42px); width: clamp(220px,17.5vw,250px); height: 650px; padding: 0; transform: translateY(-50%); border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
+.home-stage-videos { position: absolute; z-index: 2; top: 50%; right: clamp(20px,3vw,42px); width: clamp(220px,17.5vw,250px); height: min(650px, calc(100% - 60px)); max-height: 85vh; padding: 0; transform: translateY(-50%); border: 0; border-radius: 0; background: transparent; box-shadow: none; backdrop-filter: none; }
 .home-stage-videos .home-video-rail-head { display: none; }
 .home-stage-videos .home-video-rail-window { overflow: hidden; }
 .home-stage-videos .home-video-card { display: block; min-height: 0; padding: 7px; border: 1px solid #d9ecc938; border-radius: 18px; background: #0710088f; box-shadow: 0 12px 28px #00000042; }
@@ -183,11 +195,16 @@
 }
 @media (max-width: 800px) {
   .home-gallery-section { padding: 0; }
-  .home-hero-stage { min-height: 610px; }
-  .home-stage-copy { max-width: 620px; min-height: 610px; padding: 48px 28px 76px; }
+  .home-hero-stage { display: block; min-height: 0; height: auto; overflow: hidden; }
+  .home-hero-stage .home-gallery { position: relative; z-index: 0; inset: auto; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .home-hero-stage .home-gallery-track,
+  .home-hero-stage .home-slide { height: 100%; min-height: 0; }
+  .home-hero-stage .home-slide-image { object-fit: cover; object-position: center; }
+  .home-stage-shade { display: none; }
+  .home-stage-copy { max-width: none; min-height: 0; height: auto; padding: 34px 28px 42px; background: radial-gradient(ellipse at 92% 0,#31522624,transparent 50%),#0b130e; }
   .home-stage-copy h1 { max-width: 12ch; font-size: clamp(2.5rem,8.5vw,3.75rem); }
   .home-stage-videos { display: none; }
-  .home-hero-stage .home-gallery-controls { right: 20px; bottom: 20px; }
+  .home-hero-stage .home-gallery-controls { right: 14px; bottom: 14px; }
 }
 @media (max-width: 600px) {
   .utility-inner { justify-content: space-between; }
@@ -207,11 +224,11 @@
   .journey-link { align-self: stretch; }
   .home-gallery-layout { gap: 22px; }
   .home-video-rail { height: 391px; }
-  .home-hero-stage { min-height: 590px; }
-  .home-stage-copy { min-height: 590px; padding: 37px 20px 70px; }
-  .home-stage-copy h1 { max-width: 11ch; font-size: clamp(2.3rem,10vw,3.1rem); }
+  .home-hero-stage .home-gallery { aspect-ratio: 16 / 9; }
+  .home-stage-copy { min-height: 0; padding: 28px 20px 34px; }
+  .home-stage-copy h1 { max-width: 12ch; font-size: clamp(2.15rem,10vw,2.8rem); }
   .home-stage-copy .home-hero-actions { margin-block: 20px 17px; }
-  .home-hero-stage .home-gallery-controls { right: 14px; bottom: 16px; }
+  .home-hero-stage .home-gallery-controls { right: 10px; bottom: 10px; }
   .care-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 6px; gap: 5px; }
   .care-tabs button { min-height: 47px; padding-inline: 12px; font-size: .76rem; }
   .care-panel { grid-template-columns: 1fr; gap: 24px; padding: 18px; }
@@ -233,3 +250,199 @@
   .home-video-rail-track { transform: none !important; }
   .home-video-rail-track .is-duplicate { display: none; }
 }
+
+/* Care explorer refinement: give the featured image a readable portrait stage
+   and keep the overview, copy and guides aligned as one deliberate composition. */
+.care-panel {
+  grid-template-columns: minmax(0, 1.08fr) minmax(270px, .92fr);
+  gap: clamp(28px, 3.6vw, 52px);
+  padding: 28px 30px;
+}
+.care-panel-overview {
+  grid-template-columns: minmax(178px, .52fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(22px, 2.2vw, 30px);
+}
+.care-panel-photo {
+  width: 100%;
+  min-width: 0;
+  min-height: 300px;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  border: 1px solid #b8d1a821;
+  box-shadow: 0 16px 34px #00000020;
+}
+.care-panel-photo img {
+  object-position: 50% 24%;
+}
+.care-panel-intro {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.care-panel-intro h3 { max-width: 18ch; }
+.care-panel-intro p:not(.eyebrow) { max-width: 42ch; }
+.care-guide-list { gap: 10px; }
+.care-guide-link { min-height: 72px; padding: 16px 17px; }
+
+@media (max-width: 1050px) {
+  .care-panel {
+    grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
+    gap: 24px;
+    padding: 23px;
+  }
+  .care-panel-overview {
+    grid-template-columns: minmax(148px, .62fr) minmax(0, 1fr);
+    gap: 18px;
+  }
+  .care-panel-photo {
+    min-height: 250px;
+    aspect-ratio: 4 / 5;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .care-panel {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 18px;
+  }
+  .care-panel-overview {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .care-panel-photo {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+  .care-panel-photo img { object-position: 50% 22%; }
+  .care-panel-intro h3 { max-width: none; }
+  .care-guide-link { min-height: 66px; }
+}
+
+/* Tablet widths need a single readable flow. Keeping the guide rail beside a
+   narrow overview column makes the portrait image force the copy underneath it. */
+@media (max-width: 900px) {
+  .care-panel {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .care-panel-overview {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .care-panel-photo {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: 220px;
+    aspect-ratio: auto;
+  }
+  .care-panel-intro,
+  .care-guide-list,
+  .care-guide-link,
+  .care-guide-link > span {
+    min-width: 0;
+  }
+  .care-guide-link strong,
+  .care-guide-link small,
+  .care-panel-intro p {
+    overflow-wrap: anywhere;
+  }
+  .care-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .care-tabs button {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 600px) {
+  .care-panel-photo {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Navigation polish: keep the appointment control visually separated from
+   the capsule edge and move the active treatment marker with the current page. */
+@media (min-width: 1041px) {
+  .nav-cta {
+    min-height: 34px;
+    margin-inline: 2px;
+    padding: 6px 16px;
+    border-color: rgba(255,255,255,.42);
+  }
+  .nav-links a[aria-current='page']:not(.button) {
+    position: relative;
+    padding-inline: 12px;
+    border: 1px solid rgba(169,220,115,.86);
+    border-radius: 999px;
+    color: #12210f;
+    background: rgba(169,220,115,.72);
+    box-shadow: 0 0 18px rgba(169,220,115,.34), inset 0 1px 0 rgba(255,255,255,.42);
+    text-shadow: none;
+  }
+  .nav-links a[aria-current='page']:not(.button)::after {
+    display: none;
+  }
+}
+
+.nav-pill-about {
+  border-color: rgba(255,255,255,.08);
+  background: rgba(28,36,26,.42);
+}
+.nav-pill-about[aria-current='page'] {
+  border-color: rgba(169,220,115,.86);
+  background: rgba(169,220,115,.72);
+  color: #12210f !important;
+  box-shadow: 0 0 18px rgba(169,220,115,.34), inset 0 1px 0 rgba(255,255,255,.42);
+}
+
+/* Use one brighter green family for the appointment control and active tab. */
+:root {
+  --nav-vibrant-green: #b7ef72;
+  --nav-vibrant-green-deep: #93dc42;
+}
+.nav-cta {
+  background: linear-gradient(135deg, var(--nav-vibrant-green) 0%, var(--nav-vibrant-green-deep) 100%);
+  color: #10200d !important;
+  box-shadow: 0 5px 18px rgba(157,229,76,.38), inset 0 1px 0 rgba(255,255,255,.52);
+}
+.nav-cta:hover {
+  background: linear-gradient(135deg, #c6fa83 0%, #9ee851 100%);
+  box-shadow: 0 7px 22px rgba(157,229,76,.5), inset 0 1px 0 rgba(255,255,255,.62);
+  color: #10200d !important;
+}
+@media (min-width: 1041px) {
+  .nav-links a[aria-current='page']:not(.button) {
+    border-color: rgba(199,250,132,.94);
+    background: rgba(183,239,114,.78);
+    box-shadow: 0 0 20px rgba(183,239,114,.42), inset 0 1px 0 rgba(255,255,255,.48);
+  }
+}
+.nav-pill-about[aria-current='page'] {
+  border-color: rgba(199,250,132,.94);
+  background: rgba(183,239,114,.78);
+  box-shadow: 0 0 20px rgba(183,239,114,.42), inset 0 1px 0 rgba(255,255,255,.48);
+}
+
+/* Shared-element transition glides the active neon pill to the next page. */
+@media (prefers-reduced-motion: no-preference) {
+  .site-header { view-transition-name: none; }
+  .nav-links a[aria-current='page']:not(.button),
+  .nav-pill-about[aria-current='page'] { view-transition-name: nav-active-pill; }
+  ::view-transition-group(nav-active-pill) {
+    animation-duration: .46s;
+    animation-timing-function: cubic-bezier(.22,.8,.2,1);
+  }
+  ::view-transition-old(nav-active-pill),
+  ::view-transition-new(nav-active-pill) { animation-duration: .46s; }
+}
+
+

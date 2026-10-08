@@ -1,4 +1,10 @@
 document.documentElement.classList.remove('no-js');
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+if (!window.location.hash && window.scrollY > 0 && window.scrollY < 50) {
+  window.scrollTo(0, 0);
+}
 document.querySelector('.home-nasagra-section')?.remove();
 
 // Official partner destinations, shared by every page's footer.
@@ -38,7 +44,12 @@ const siteHeader = document.querySelector('.site-header');
 // traditional-care explanation on the homepage.
 const founderSection = document.querySelector('.home-founder-section');
 const introSection = document.querySelector('.home-intro');
-if (founderSection && introSection) introSection.before(founderSection);
+if (founderSection && introSection) {
+  const treatmentWall = founderSection.nextElementSibling?.matches('[data-treatment-wall]')
+    ? founderSection.nextElementSibling : null;
+  introSection.before(founderSection);
+  if (treatmentWall) founderSection.after(treatmentWall);
+}
 
 const careLabelUpdates = { women: 'Women’s Health Care', skin: 'Skin & Hair', movement: 'Joints & Cupping Therapy', family: 'Family & Child Care' };
 Object.entries(careLabelUpdates).forEach(([key, label]) => {
@@ -97,6 +108,8 @@ if (menuButton && navigation) {
     if (window.innerWidth > 1040) setMenuOpen(false);
   });
 }
+
+
 
 const revealItems = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && !siteMotionPaused()) {
@@ -205,13 +218,14 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
     let focused = false;
     let timer;
     const pauseButton = carousel.querySelector('[data-carousel-pause]');
+    const autoplayInterval = parseInt(track.dataset.autoplayInterval, 10) || 3000;
     const schedule = () => {
       window.clearInterval(timer);
       timer = window.setInterval(() => {
         if (paused || hovered || focused || siteMotionPaused() || document.hidden || document.querySelector('dialog[open]') || !track.getBoundingClientRect().height || track.getBoundingClientRect().bottom < 0 || track.getBoundingClientRect().top > innerHeight) return;
         const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 12;
         track.scrollTo({ left: atEnd ? 0 : track.scrollLeft + step(), behavior: 'smooth' });
-      }, 6200);
+      }, autoplayInterval);
     };
 
     pauseButton?.addEventListener('click', () => {

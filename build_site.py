@@ -25,7 +25,7 @@ WHATSAPP = "https://api.whatsapp.com/send/?phone=917845539622&text=Hello%20Siddh
 GOOGLE_SEARCH = "https://www.google.com/maps/search/?api=1&query=Siddha+365+Health+Care+Clinic+Villivakkam+Chennai"
 GOOGLE_EMBED = "https://maps.google.com/maps?q=Siddha%20365%20Health%20Care%20Clinic%20Villivakkam%20Chennai&output=embed"
 REVIEWS_API = "https://siddha365.com/wp-json/wp/v2/pages/7?_fields=content"
-ASSET_VERSION = "20261006-hero-slides-v1"
+ASSET_VERSION = "20261008-treatment-placement-v2"
 
 LOGO = "assets/optimized/siddha365-header-lockup.webp"
 FAVICON = "wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png"
@@ -174,16 +174,18 @@ CONDITIONS = [
 
 NAV = [
     ("Home", ""), ("About", "about"), ("Treatments", "treatments"),
-    ("Gallery", "gallery"), ("Products", "products"), ("Reviews", "reviews"),
+    ("Gallery", "gallery"), ("Reviews", "reviews"),
     ("Contact us", "contact-us"),
 ]
 
 HOME_SLIDES = [
-    ("wp-content/uploads/hero/siddha-herbal-apothecary.jpg", "Traditional Siddha herbal preparation and healing apothecary"),
-    ("wp-content/uploads/hero/siddha-cupping-therapy.jpg", "Traditional Siddha glass cupping and Varma therapy"),
-    ("wp-content/uploads/hero/siddha-oil-therapy.jpg", "Therapeutic herbal medicated oil and wellness therapy"),
-    ("wp-content/uploads/hero/siddha-traditional-alchemy.jpg", "Ancient Siddha herbal alchemy and healing wisdom"),
-    ("wp-content/uploads/hero/siddha-botanical-remedies.jpg", "Pure botanical extracts and natural Siddha remedies"),
+    ("wp-content/uploads/hero/female-siddha-consultation.png", "Female Siddha doctor consulting with a woman patient in a botanical clinic"),
+    ("wp-content/uploads/hero/female-siddha-fire-cupping.png", "Female Siddha doctor providing professional fire cupping therapy to a woman patient"),
+    ("wp-content/uploads/hero/slide-04-handcrafted-preparation.jpg", "Artisan preparation of natural herbs, fresh neem leaves, and traditional remedies"),
+    ("wp-content/uploads/hero/slide-05-sanctuary-garden.jpg", "Peaceful Siddha clinic sanctuary surrounded by lush medicinal botanical gardens"),
+    ("wp-content/uploads/hero/slide-06-traditional-alchemy.jpg", "Ancient Siddha healing wisdom, herbal formulations, and palm-leaf manuscripts"),
+    ("wp-content/uploads/hero/slide-07-botanical-remedies.jpg", "Pure botanical extracts, medicinal choornam powders, and therapeutic oils"),
+    ("wp-content/uploads/hero/slide-08-oil-therapy.jpg", "Medicated herbal oil formulations and traditional wellness therapy"),
 ]
 
 SPECIALTY_CARE = [
@@ -325,7 +327,6 @@ def footer(route):
     reviews = rel(route, "reviews")
     contact = rel(route, "contact-us")
     gallery = rel(route, "gallery")
-    products = rel(route, "products")
     tel = f"tel:{PHONE_TEL}"
     logo = asset(route, LOGO)
     partner_items = "".join(f'<div class="partner-logo"><img src="{asset(route, path)}" alt="{esc(name)}" loading="lazy" decoding="async"></div>' for path, name in PARTNER_LOGOS)
@@ -336,7 +337,7 @@ def footer(route):
   </section>
   <div class="container footer-grid">
     <div class="footer-brand"><a class="brand" href="{home}" aria-label="Siddha365 home"><img src="{logo}" alt="Siddha 365 Health Care Clinic"></a><p>Thoughtful Siddha care with personal attention in Chennai. Every concern starts with a conversation and an individual assessment.</p></div>
-    <div><h2 class="footer-title">Explore</h2><div class="footer-links"><a href="{treatment}">Treatments</a><a href="{about}">About the clinic</a><a href="{gallery}">Gallery</a><a href="{products}">Products</a><a href="{reviews}">Google reviews</a></div></div>
+    <div><h2 class="footer-title">Explore</h2><div class="footer-links"><a href="{treatment}">Treatments</a><a href="{about}">About the clinic</a><a href="{gallery}">Gallery</a><a href="{reviews}">Google reviews</a></div></div>
     <div><h2 class="footer-title">Visit</h2><div class="footer-links"><a href="{contact}">Clinic locations</a><a href="{contact}#hours">Opening hours</a><a href="{tel}">{PHONE}</a><a href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">WhatsApp appointments</a></div></div>
     <div><h2 class="footer-title">Clinic hours</h2><div class="footer-links"><span>Monday – Saturday</span><span>10:30 am – 1:30 pm</span><span>7:00 pm – 9:30 pm</span><span>Sunday · by appointment</span></div></div>
   </div>
@@ -417,6 +418,7 @@ def homepage():
         for index, (path, label) in enumerate(HOME_SLIDES)
     )
     explorer = care_explorer()
+
     stats = "".join([
         '<article class="home-stat"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 37V10M8 37h33M13 29l9-9 7 7 12-14M33 13h8v8"/></svg></span><strong data-count-to="5">5</strong><span class="stat-label">Year of experience</span></article>',
         '<article class="home-stat"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><g transform="rotate(-42 18 24)"><rect x="10" y="8" width="15" height="32" rx="7.5"/><path d="M10 24h15"/></g><g transform="rotate(42 32 24)"><rect x="25" y="12" width="13" height="27" rx="6.5"/><path d="M25 25.5h13"/></g></svg></span><strong data-count-to="500">500</strong><span class="stat-label">Health concerns supported</span></article>',
@@ -427,7 +429,7 @@ def homepage():
     home_video_cards = "".join(f'''<article class="home-video-card"><button class="home-video-poster" type="button" data-youtube-id="{esc(vid)}" data-youtube-title="{esc(label)}" aria-label="Play {esc(label)}"><img src="https://i.ytimg.com/vi/{esc(vid)}/mqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="video-play-icon" aria-hidden="true">▶</span></button><p>{esc(label)}</p></article>''' for vid, label in POPULAR_VIDEOS)
     review_cards = review_rows_html(route)
     body = f'''<main id="main-content">
-  <section class="home-gallery-section"><div class="hero-glow" data-hero-glow aria-hidden="true"></div><div class="hero-orbit" aria-hidden="true"></div><div class="container"><div class="home-hero-stage"><div class="home-gallery" data-carousel><div class="carousel-controls home-gallery-controls"><button class="icon-button" type="button" data-carousel-prev aria-label="Previous clinic image">←</button><button class="icon-button" type="button" data-carousel-next aria-label="Next clinic image">→</button></div><div class="home-gallery-track" data-carousel-track data-autoplay="true" data-scroll-step="full" aria-label="Clinic treatments and care images">{slides}</div></div><div class="home-stage-shade" aria-hidden="true"></div><div class="home-hero-copy home-stage-copy"><p class="eyebrow">Traditional Siddha care · Chennai</p><h1>Thoughtful care, <span class="accent">rooted in tradition</span></h1><p>Meet Dr. Sindhu and explore personal care at Siddha365 Health Care Clinic.</p><div class="hero-actions home-hero-actions"><a class="button" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book an appointment ↗</a><a class="button button-secondary" href="#specialized-care">Explore your care</a></div><div class="home-hero-details"><span>Dr. Sindhu V. · BSMS, MD (Siddha)</span><a href="contact-us/">Two locations in Chennai <span aria-hidden="true">↗</span></a></div></div><aside class="home-video-rail home-stage-videos" aria-label="Videos from the Siddha365 YouTube channel"><div class="home-video-rail-head"><div><p class="eyebrow">Watch &amp; learn</p><h2>From our <span class="accent">channel</span></h2></div><a class="text-link" href="{YOUTUBE_CHANNEL}" target="_blank" rel="noopener noreferrer">YouTube</a></div><div class="home-video-rail-window" data-video-rail><div class="home-video-rail-track" data-video-rail-track>{home_video_cards}</div></div></aside></div></div></section>
+  <section class="home-gallery-section"><div class="hero-glow" data-hero-glow aria-hidden="true"></div><div class="hero-orbit" aria-hidden="true"></div><div class="container"><div class="home-hero-stage"><div class="home-gallery" data-carousel><div class="carousel-controls home-gallery-controls"><button class="icon-button" type="button" data-carousel-prev aria-label="Previous clinic image">←</button><button class="icon-button" type="button" data-carousel-next aria-label="Next clinic image">→</button></div><div class="home-gallery-track" data-carousel-track data-autoplay="true" data-autoplay-interval="3000" data-scroll-step="full" aria-label="Clinic treatments and care images">{slides}</div></div><div class="home-stage-shade" aria-hidden="true"></div><div class="home-hero-copy home-stage-copy"><p class="eyebrow">Traditional Siddha care · Chennai</p><h1>Thoughtful care, <span class="accent">rooted in tradition</span></h1><p>Meet Dr. Sindhu and explore personal care at Siddha365 Health Care Clinic.</p><div class="hero-actions home-hero-actions"><a class="button" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book an appointment ↗</a><a class="button button-secondary" href="#specialized-care">Explore your care</a></div><div class="home-hero-details"><span>Dr. Sindhu V. · BSMS, MD (Siddha)</span><a href="contact-us/">Two locations in Chennai <span aria-hidden="true">↗</span></a></div></div><aside class="home-video-rail home-stage-videos" aria-label="Videos from the Siddha365 YouTube channel"><div class="home-video-rail-head"><div><p class="eyebrow">Watch &amp; learn</p><h2>From our <span class="accent">channel</span></h2></div><a class="text-link" href="{YOUTUBE_CHANNEL}" target="_blank" rel="noopener noreferrer">YouTube</a></div><div class="home-video-rail-window" data-video-rail><div class="home-video-rail-track" data-video-rail-track>{home_video_cards}</div></div></aside></div></div></section>
 
   <section class="section home-intro"><div class="container home-intro-grid"><div class="home-intro-copy reveal"><p class="eyebrow">Siddha 365 Health Care</p><h2>Traditional care rooted in <span class="accent">Tamil Siddha</span></h2><p class="home-tamil" lang="ta">பாரம்பரிய சித்த மருத்துவத்தின் மூலம் முழுமையான இயற்கை சிகிச்சை.</p><p>Siddha365 Health Care Clinic is guided by Dr. Sindhu V., B.S.M.S., M.D. (Siddha). Rooted in Tamil Siddha tradition, the clinic offers individual consultations with careful assessment, a respectful conversation about each person’s needs, and clear next steps.</p><div class="hero-actions"><a class="button" href="{WHATSAPP}" target="_blank" rel="noopener noreferrer">Book an appointment ↗</a><a class="button button-secondary" href="about/">About the clinic</a></div></div><div class="home-intro-image reveal">{image_for(route, "wp-content/uploads/hero/tamil-siddha-herbal-prep.jpg", "Herbs and natural botanical remedies prepared using traditional Tamil Siddha methods")}</div></div></section>
 
@@ -439,12 +441,22 @@ def homepage():
 
   <section class="section home-reviews-section"><div class="container review-carousel" data-live-reviews-url="{REVIEWS_API}"><div class="section-head reveal"><div><p class="eyebrow">Patient feedback</p><h2>Words from our <span class="accent">Google reviewers</span></h2><p>Patient experiences from the clinic’s Google review feed. Select a card to read the full review.</p></div></div>{review_cards}<p class="muted review-feed-note" data-review-status aria-live="polite">Connecting to the clinic’s Google review feed…</p></div></section>
 
-  <section class="section home-tradition-section"><div class="container home-tradition-grid"><div class="tradition-copy reveal"><p class="eyebrow">Siddha tradition</p><h2>Concept of Vatham, Pitham &amp; <span class="accent">Kabam</span></h2><p>Siddha tradition describes Vatham, Pitham, and Kabam as three principles used to discuss balance in health. This historical framework is part of Siddha practice; it does not replace medical testing or an individual clinical diagnosis.</p><div class="dosha-list"><article><strong>Vatham</strong><span>Traditionally associated with movement</span></article><article><strong>Pitham</strong><span>Traditionally associated with transformation</span></article><article><strong>Kabam</strong><span>Traditionally associated with structure</span></article></div></div><figure class="tradition-art reveal">{image_for(route, "wp-content/uploads/2026/02/ChatGPT-Image-Feb-25-2026-02_30_25-PM.png", "Traditional Siddha illustration of Vatham, Pitham, and Kabam")}</figure></div></section>
+  <section class="section home-tradition-section"><div class="container home-tradition-grid"><div class="tradition-copy reveal"><p class="eyebrow">Siddha tradition</p><h2>Concept of Vatham, Pitham &amp; <span class="accent">Kabam</span></h2><p>Siddha tradition describes Vatham, Pitham, and Kabam as three principles used to discuss balance in health. This historical framework is part of Siddha practice; it does not replace medical testing or an individual clinical diagnosis.</p><div class="dosha-list"><article><strong>Vatham</strong><span>Traditionally associated with movement</span></article><article><strong>Pitham</strong><span>Traditionally associated with transformation</span></article><article><strong>Kabam</strong><span>Traditionally associated with structure</span></article></div></div><figure class="tradition-art reveal">{image_for(route, "wp-content/uploads/2026/02/vatham-pitham-kabam-premium.png", "Contemporary Siddha-inspired illustration representing Vatham, Pitham, and Kabam in balance")}</figure></div></section>
 
   <section class="section home-founder-section"><div class="container split-panel founder-panel"><div class="split-image reveal">{image_for(route, DOCTOR, HERO_ALT, "founder-image")}</div><div class="split-copy reveal"><p class="eyebrow">Founder &amp; Chief Siddha Consultant</p><h2>Dr. Sindhu <span class="accent">V.</span></h2><p>Dr. Sindhu V., B.S.M.S., M.D. (Siddha), H.A.H.M., Dip. Cupp., is the Founder and Chief Siddha Consultant at Siddha365 Health Care Clinic. Her practice is guided by Siddha knowledge, clinical assessment, and patient-centred conversations.</p><ul class="check-list"><li>Women’s health, fertility, and family care</li><li>Skin, hair, joint, and lifestyle concerns</li><li>Traditional therapies discussed as part of an individual plan</li></ul><a class="button button-secondary" href="about/">Meet the clinic and doctor</a></div></div></section>
+{treatment_wall_section(route)}
 <section class="section home-visit-section"><div class="container visit-planner"><div><p class="eyebrow">Make your visit easier</p><h2>A little preparation.<br><span class="accent">A clearer conversation.</span></h2><p>Keep your questions ready and contact the clinic before you travel.</p><a class="button" href="contact-us/">Plan your visit <span aria-hidden="true">↗</span></a></div><div class="visit-planner-details"><article><span class="visit-step-number">01</span><div><h3>Choose your location</h3><p>Villivakkam or Mogappair East, Chennai.</p><a class="text-link" href="contact-us/">Locations &amp; directions</a></div></article><article><span class="visit-step-number">02</span><div><h3>Confirm your appointment</h3><p>Call the clinic for availability and opening hours.</p><a class="text-link" href="tel:{PHONE_TEL}">{PHONE}</a></div></article><article><span class="visit-step-number">03</span><div><h3>Bring what matters</h3><p>Your previous reports, current medicine list and questions for the clinician.</p></div></article></div></div></section>
 </main>'''
     return page_shell(route, "Home", "Siddha365 Health Care Clinic in Chennai. Explore individual treatment guides, meet Dr. Sindhu V, and plan a clinic visit.", body, homepage=True)
+
+
+def treatment_wall_section(route):
+    treatment_rows = []
+    for row in range(4):
+        ordered = CONDITIONS[row * 3:] + CONDITIONS[:row * 3]
+        pills = "".join(f'<span class="treatment-wall-pill">{esc(item["title"])}</span>' for item in ordered)
+        treatment_rows.append(f'<div class="treatment-wall-row" data-treatment-row="{row}" aria-hidden="true">{pills}{pills}</div>')
+    return '<section class="treatment-wall" aria-label="Explore our treatment guides" data-treatment-wall><div class="treatment-wall-rows">' + "".join(treatment_rows) + '</div><div class="treatment-wall-center"><a class="button treatment-wall-cta" href="' + rel(route, 'treatments') + '">Explore all<br>treatment guides <span aria-hidden="true">↗</span></a></div></section>'
 
 
 def treatment_index():
@@ -452,7 +464,7 @@ def treatment_index():
     cards = "".join(condition_card(route, item) for item in CONDITIONS)
     body = f'''<main id="main-content"><section class="page-hero"><div class="container"><div class="page-hero-grid"><div class="reveal">{breadcrumb(route, "Treatments")}<p class="eyebrow">Individual care guides</p><h1>Treatments &amp; <span class="accent">areas of care</span></h1><p class="lead">Each topic opens a separate page with an overview of possible causes or purpose, common care options, and when to seek medical advice.</p></div>{image_for(route, DOCTOR, HERO_ALT, "page-hero-art reveal")}</div></div></section>
 <section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">Browse by topic</p><h2>Choose a <span class="accent">care guide</span></h2><p>These pages are educational and do not diagnose or promise a cure. Please consult a qualified clinician for personal advice.</p></div></div><div class="card-grid">{cards}</div></div></section>
-<section class="section-tight"><div class="container"><div class="section-head"><div><p class="eyebrow">Traditional practice</p><h2>Breathing and <span class="accent">mindful movement</span></h2></div></div><a class="nasagra-link reveal" href="../#nasagra-mudra">{image_for(route, "wp-content/uploads/2026/02/thepranabody.png", "Traditional illustration associated with pranayama concepts", "nasagra-link-image")}<span class="nasagra-link-copy"><span class="tag">Home learning guide</span><strong>Nasagra Mudra</strong><span>A traditional hand position used in alternate-nostril breathing, with general safety guidance.</span><span class="text-link">Read the practice guide on the home page</span></span></a></div></section></main>'''
+</main>'''
     return page_shell(route, "Treatments", "Browse separate Siddha365 care guide pages for health conditions and traditional therapies.", body, section="treatments")
 
 
@@ -500,8 +512,6 @@ def pages():
     gallery_content = f'<section class="section"><div class="container"><div class="gallery-grid">{gallery_items}</div><p class="medical-note">Clinic imagery is shared for general information. Individual treatment availability and suitability are decided after consultation.</p></div></section>'
     output["gallery/index.html"] = generic_page("gallery", "Clinic gallery", "At the clinic", "A look at Siddha365, traditional practice, and the clinic’s areas of care.", gallery_content, DOCTOR, "gallery")
 
-    product_content = '''<section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">Medicine guidance</p><h2>Careful choices, <span class="accent">personal advice</span></h2><p>Products and medicines should be selected for the person, the condition, and the full medicines list—not as a one-size-fits-all purchase.</p></div></div><div class="product-grid"><article class="product-card"><span class="feature-icon" aria-hidden="true">✳</span><h3>Clinician guidance</h3><p>Discuss whether a medicine or product is suitable for your health concern and existing care plan.</p></article><article class="product-card"><span class="feature-icon" aria-hidden="true">◉</span><h3>Know the ingredients</h3><p>Ask what a product contains, how it is used, and whether it has known risks or interactions.</p></article><article class="product-card"><span class="feature-icon" aria-hidden="true">↗</span><h3>Follow up</h3><p>Report side effects or changing symptoms, and keep follow-up with your usual treating clinician.</p></article></div><div class="products-availability-cta"><a class="button" href="https://api.whatsapp.com/send/?phone=917845539622&amp;text=Hello%20Siddha%20365%2C%20I%20have%20a%20question%20about%20products.&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener noreferrer">Ask the clinic about availability ↗</a></div><p class="medical-note"><strong>Please note:</strong> This page does not offer online diagnosis or self-prescribing. Do not stop prescribed medicines or rely on product claims that promise a cure.</p></div></section>'''
-    output["products/index.html"] = generic_page("products", "Products & medicine guidance", "Products", "Learn how to ask about Siddha medicine and product availability safely.", product_content, "wp-content/uploads/2026/02/new-doc.jpg", "products")
 
     review_cards = review_rows_html("reviews")
     reviews_content = f'''<section class="section"><div class="container review-carousel" data-live-reviews-url="{REVIEWS_API}"><div class="section-head"><div><p class="eyebrow">Patient feedback</p><h2>Latest Google <span class="accent">reviews</span></h2><p>Patient experiences from the clinic’s Google review feed. Select a card to read the full review.</p></div></div>{review_cards}<p class="muted review-feed-note" data-review-status aria-live="polite">Connecting to the clinic’s Google review feed…</p><div class="review-source-panel"><span class="source-mark" aria-hidden="true">G</span><div><h3>Shared on Google. Shown in their own words.</h3><p>Names, ratings and review text come from the clinic’s existing Google review feed. New feedback appears after that feed syncs with Google. Select a reviewer’s name to view their Google profile.</p></div></div></div></section>'''
@@ -534,14 +544,14 @@ def optimize_embedded_images(generated):
         def replace_src(match):
             src = match.group(2)
             source_rel = posixpath.normpath(posixpath.join(page_dir, src))
-            if not source_rel.startswith("wp-content/uploads/") or source_rel == DOCTOR:
+            if not source_rel.startswith("wp-content/uploads/"):
                 return match.group(0)
             source = SITE / Path(source_rel)
             if not source.is_file():
                 return match.group(0)
 
             digest = hashlib.sha1(source_rel.encode("utf-8")).hexdigest()[:16]
-            detailed_artwork = source_rel == "wp-content/uploads/2026/02/ChatGPT-Image-Feb-25-2026-02_30_25-PM.png"
+            detailed_artwork = source_rel == "wp-content/uploads/2026/02/vatham-pitham-kabam-premium.png"
             webp_rel = f"assets/optimized/{digest}-hq.webp" if detailed_artwork else f"assets/optimized/{digest}-v2.webp"
             optimized = SITE / Path(webp_rel)
             if webp_rel not in outputs:

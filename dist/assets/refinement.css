@@ -18,7 +18,7 @@ p { text-wrap: pretty; }
 .nav-links a[aria-current='page']:not(.button) { text-decoration: none; }
 .page-hero { padding-block: clamp(40px, 5vw, 68px); }
 .page-hero h1 { font-size: clamp(2.4rem, 4.8vw, 4.1rem); }
-.page-hero-art { height: 240px; max-height: none; }
+.page-hero-art { height: 240px; max-height: none; object-position: center 20%; }
 .prose-panel { padding: clamp(22px, 2.4vw, 30px); }
 .prose-panel p, .prose-panel li { line-height: 1.8; }
 .care-aside { top: 98px; }
@@ -94,7 +94,7 @@ p { text-wrap: pretty; }
 .home-video-rail-head h2 { font-size: 1.5rem; }
 .home-video-rail-head .eyebrow { font-size: .65rem; }
 .home-video-card { grid-template-columns: minmax(140px, .95fr) minmax(0, 1fr); min-height: 105px; padding: 8px; gap: 12px; border-radius: 14px; }
-.home-video-card p { font-size: .87rem; line-height: 1.45; -webkit-line-clamp: 3; }
+.home-video-card p { font-size: .87rem; line-height: 1.45; -webkit-line-clamp: 3; line-clamp: 3; }
 .home-video-poster .video-play-icon { width: 36px; height: 36px; font-size: .85rem; }
 .home-video-rail-window { max-height: none; flex: 1 1 0%; height: 0; }
 .home-video-rail-track { gap: 12px; }
@@ -131,7 +131,7 @@ body:has(dialog[open]) { overflow: hidden; }
 body:has(dialog[open]) .review-marquee-track { animation-play-state: paused; }
 .review-marquee .review-card { width: clamp(320px, 31vw, 410px); min-height: 300px; padding: 25px; gap: 16px; }
 .review-card .stars { margin: 0; letter-spacing: .12em; }
-.review-marquee .review-card blockquote { -webkit-line-clamp: 4; min-height: 6.6em; margin: 0; font-size: .95rem; }
+.review-marquee .review-card blockquote { -webkit-line-clamp: 4; line-clamp: 4; min-height: 6.6em; margin: 0; font-size: .95rem; }
 .review-by { margin-top: auto; }
 .review-by a { color: #e9efe5; font-size: .85rem; text-underline-offset: 3px; }
 .review-by a:hover { text-decoration: underline; }
