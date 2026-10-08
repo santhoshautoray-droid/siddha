@@ -462,7 +462,7 @@ def treatment_wall_section(route):
 def treatment_index():
     route = "treatments"
     cards = "".join(condition_card(route, item) for item in CONDITIONS)
-    body = f'''<main id="main-content"><section class="page-hero"><div class="container"><div class="page-hero-grid"><div class="reveal">{breadcrumb(route, "Treatments")}<p class="eyebrow">Individual care guides</p><h1>Treatments &amp; <span class="accent">areas of care</span></h1><p class="lead">Each topic opens a separate page with an overview of possible causes or purpose, common care options, and when to seek medical advice.</p></div>{image_for(route, DOCTOR, HERO_ALT, "page-hero-art reveal")}</div></div></section>
+    body = f'''<main id="main-content">
 <section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">Browse by topic</p><h2>Choose a <span class="accent">care guide</span></h2><p>These pages are educational and do not diagnose or promise a cure. Please consult a qualified clinician for personal advice.</p></div></div><div class="card-grid">{cards}</div></div></section>
 </main>'''
     return page_shell(route, "Treatments", "Browse separate Siddha365 care guide pages for health conditions and traditional therapies.", body, section="treatments")
