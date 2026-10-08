@@ -25,7 +25,7 @@ WHATSAPP = "https://api.whatsapp.com/send/?phone=917845539622&text=Hello%20Siddh
 GOOGLE_SEARCH = "https://www.google.com/maps/search/?api=1&query=Siddha+365+Health+Care+Clinic+Villivakkam+Chennai"
 GOOGLE_EMBED = "https://maps.google.com/maps?q=Siddha%20365%20Health%20Care%20Clinic%20Villivakkam%20Chennai&output=embed"
 REVIEWS_API = "https://siddha365.com/wp-json/wp/v2/pages/7?_fields=content"
-ASSET_VERSION = "20261008-compact-treatment-button-v9"
+ASSET_VERSION = "20261008-about-logo-once-v13"
 
 LOGO = "assets/optimized/siddha365-header-lockup.webp"
 FAVICON = "wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png"
@@ -506,7 +506,7 @@ def pages():
 
     about_content = f'''<section class="section"><div class="container split-panel"><div class="split-image reveal">{image_for("about", DOCTOR, HERO_ALT)}</div><div class="split-copy reveal"><p class="eyebrow">The clinic</p><h2>Traditional knowledge, delivered with <span class="accent">care and clarity</span></h2><p>Siddha365 Health Care Clinic is guided by Dr. Sindhu V., B.S.M.S., M.D. (Siddha), H.A.H.M., Dip. Cupp, Founder and Chief Siddha Consultant. The clinic offers Siddha consultations in Chennai with a focus on listening, individual assessment, and clear follow-up.</p><p>Care is discussed with attention to each person's history and current medicines. Patients are encouraged to ask questions, understand the limits of each option, and seek the right specialist care where needed.</p><ul class="check-list"><li>Women’s health, fertility, and family care</li><li>Skin, hair, joint, and lifestyle concerns</li><li>Traditional therapies discussed as part of an individual plan</li></ul><a class="button" href="{rel('about','contact-us')}">Clinic locations &amp; hours</a></div></div></section>
 <section class="section-tight"><div class="container"><div class="feature-grid"><article class="feature-card"><span class="feature-icon" aria-hidden="true">◎</span><h3>Listen first</h3><p>Your concerns, goals, and medical history inform the conversation.</p></article><article class="feature-card"><span class="feature-icon" aria-hidden="true">✳</span><h3>Explain options</h3><p>Discuss what a treatment can and cannot do, along with alternatives.</p></article><article class="feature-card"><span class="feature-icon" aria-hidden="true">↗</span><h3>Work with your care team</h3><p>Share diagnoses and medicines so all clinicians can support safer decisions.</p></article></div></div></section>'''
-    output["about/index.html"] = generic_page("about", "About Siddha365", "About us", "Meet the clinic and learn about the practitioner who leads Siddha365 Health Care Clinic.", about_content, DOCTOR, "about")
+    output["about/index.html"] = generic_page("about", "About Siddha365", "About us", "Meet the clinic and learn about the practitioner who leads Siddha365 Health Care Clinic.", about_content, LOGO, "about")
 
     treatment_images = [(c["image"], c["title"]) for c in CONDITIONS[:9]]
     treatment_images.extend([("wp-content/uploads/2024/07/oilslider-11-scaled.jpg", "Traditional oil therapy"), ("wp-content/uploads/2024/11/HERBAL-STEAM-BATH-scaled.jpg", "Herbal steam bath"), (DOCTOR, HERO_ALT)])

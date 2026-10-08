@@ -264,3 +264,15 @@ body:has(dialog[open]) .review-marquee-track { animation-play-state: paused; }
  .page-reviews .review-heading-grid .lead {margin-bottom:0;}
  .page-reviews .page-hero + .section {padding-top:32px;}
 }
+
+.page-about .page-hero-art {height:auto; max-height:200px; width:100%; object-fit:contain; object-position:center; border:0; border-radius:0; background:transparent;}
+@media(max-width:740px) {.page-about .page-hero-art {width:min(240px,100%); max-height:150px; justify-self:center;}}
+
+/* A single entrance for the About page logo. */
+.page-about .page-hero-art {opacity:1; clip-path:none; animation:about-logo-enter 700ms cubic-bezier(.22,.8,.2,1) both;}
+@keyframes about-logo-enter {
+ from {opacity:0; transform:translateY(14px);}
+ to {opacity:1; transform:translateY(0);}
+}
+@media(prefers-reduced-motion:reduce) {.page-about .page-hero-art {animation:none; transform:none;}}
+.motion-paused .page-about .page-hero-art {animation:none; transform:none;}
