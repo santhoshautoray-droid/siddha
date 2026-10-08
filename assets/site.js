@@ -136,7 +136,7 @@ if ('IntersectionObserver' in window && !siteMotionPaused()) {
 const statsSection = document.querySelector('.home-stats-band');
 if (statsSection) {
   const milestones = [
-    { value: 5, label: 'Years of experience', detail: 'Thoughtful, personal Siddha care', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-7 3v4l3 2"/></svg>' },
+    { value: 5, label: 'Years of experience', detail: 'Thoughtful, personal Siddha care', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="m8.5 12-1 9 4.5-3 4.5 3-1-9M10 8l1.5 1.5L14 6.5"/></svg>' },
     { value: 500, label: 'Health concerns supported', detail: 'Individual concerns, carefully heard', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10Z"/><path d="M8.5 12h2l1.2-2.2 1.5 4 1.1-1.8h1.4"/></svg>' },
     { value: 700, label: 'Treatments', detail: 'Care plans considered with clarity', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h8v4a4 4 0 0 1-8 0V5Zm4 8v6m-3-3h6"/><path d="M5 5h2m10 0h2"/></svg>' },
     { value: 5000, label: 'Clients served', detail: 'People and families across Chennai', icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M6 20c.6-3.5 2.7-5 6-5s5.4 1.5 6 5M5.5 11.5a2.3 2.3 0 1 1 1.6-4M18.5 11.5a2.3 2.3 0 1 0-1.6-4"/></svg>' },

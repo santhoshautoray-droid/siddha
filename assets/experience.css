@@ -1,6 +1,7 @@
 /* A consistent interaction layer for the clinic's static pages. */
 :root { --ease-care: cubic-bezier(.22,.7,.25,1); }
 .page-treatments #main-content > .section:first-child { padding-top: 118px; }
+.page-treatments .card-grid .condition-card h3 { text-transform: uppercase; }
 @media (max-width: 600px) {
   .page-treatments #main-content > .section:first-child { padding-top: 30px; }
 }
@@ -8,13 +9,13 @@
 .treatment-wall-rows { display: grid; gap: 16px; }
 .treatment-wall-row { display: flex; gap: 14px; width: max-content; transform: translate3d(-180px,0,0); }
 .treatment-wall-pill { display: inline-flex; align-items: center; flex: none; min-height: 38px; padding: 8px 20px; border: 1px solid #b6d1ba45; border-radius: 999px; color: #d5e2d4; font-size: .76rem; white-space: nowrap; }
-.treatment-wall-center { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; background: radial-gradient(ellipse at center,#0d1c15 0%,#0d1c15c9 14%,transparent 43%); }
-.treatment-wall-cta { pointer-events: auto; text-align: center; padding: 22px 34px; min-height: 96px; border-radius: 999px; font-size: 1rem; line-height: 1.45; box-shadow: 0 8px 30px #0003; }
+.treatment-wall-center { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; background: radial-gradient(ellipse at center,#0d1c15 0%,#0d1c1590 8%,transparent 30%); }
+.treatment-wall-cta { pointer-events: auto; text-align: center; padding: 12px 22px; min-height: 64px; border-radius: 999px; font-size: .88rem; line-height: 1.45; box-shadow: 0 8px 30px #0003; }
 @media (max-width: 600px) {
   .treatment-wall { padding-block: 24px; }
   .treatment-wall-rows { gap: 12px; }
   .treatment-wall-pill { min-height: 34px; padding: 7px 15px; font-size: .69rem; }
-  .treatment-wall-cta { min-height: 84px; padding: 17px 25px; font-size: .88rem; }
+  .treatment-wall-cta { min-height: 56px; padding: 10px 18px; font-size: .8rem; }
 }
 :focus-visible { outline: 2px solid #c2ed92; outline-offset: 5px; }
 .button:active, .icon-button:active { transform: scale(.97); }

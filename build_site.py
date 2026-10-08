@@ -25,7 +25,7 @@ WHATSAPP = "https://api.whatsapp.com/send/?phone=917845539622&text=Hello%20Siddh
 GOOGLE_SEARCH = "https://www.google.com/maps/search/?api=1&query=Siddha+365+Health+Care+Clinic+Villivakkam+Chennai"
 GOOGLE_EMBED = "https://maps.google.com/maps?q=Siddha%20365%20Health%20Care%20Clinic%20Villivakkam%20Chennai&output=embed"
 REVIEWS_API = "https://siddha365.com/wp-json/wp/v2/pages/7?_fields=content"
-ASSET_VERSION = "20261008-mobile-utility-v1"
+ASSET_VERSION = "20261008-compact-treatment-button-v9"
 
 LOGO = "assets/optimized/siddha365-header-lockup.webp"
 FAVICON = "wp-content/uploads/2023/05/cropped-SASEE-siddha-logo-final-2-1-192x192.png"
@@ -116,8 +116,8 @@ CONDITIONS = [
     },
     {
         "slug": "piles", "title": "Piles (haemorrhoids)", "category": "Digestive health",
-        "image": "wp-content/uploads/2023/05/IMG_20230501_210418-1-2048x1536.jpg",
-        "image_alt": "A patient discussing a health concern with a Siddha clinician",
+        "image": "wp-content/uploads/2023/05/piles-problem-1.png",
+        "image_alt": "An anatomical teaching model illustrating haemorrhoids",
         "intro": "Piles are swollen blood vessels in or around the anus. Bleeding or pain should not automatically be assumed to be piles.",
         "why": "Constipation, straining to pass stool, pregnancy, heavy lifting, age, and excess weight can increase the chance of piles. A clinician can check whether another condition is causing rectal bleeding or discomfort.",
         "care": ["Fibre-rich foods, fluids, and avoiding straining can help keep stools soft; a pharmacist or clinician can advise on suitable symptom relief.", "If symptoms persist or recur, arrange a medical review. Some people need procedures or surgery after assessment.", "Follow advice about pain relief and any bleeding; do not use medicines that may be unsafe for your health conditions without checking first."],
@@ -126,8 +126,8 @@ CONDITIONS = [
     },
     {
         "slug": "sinusitis", "title": "Sinusitis", "category": "Ear, nose & throat",
-        "image": "wp-content/uploads/2023/05/IMG_20230501_210901-1-2048x1536.jpg",
-        "image_alt": "A patient meeting with a clinician at the Siddha365 clinic",
+        "image": "wp-content/uploads/2023/05/Sinusitis-1.png",
+        "image_alt": "Illustration showing the location of the sinus cavities",
         "intro": "Sinusitis is swelling of the lining of the sinuses, often after a cold or flu. Most short-term cases improve without antibiotics.",
         "why": "A viral infection commonly causes sinus swelling. Allergy and ongoing inflammation can contribute to recurring or longer-lasting symptoms. Swelling can block normal mucus drainage and cause pressure, congestion, or facial pain.",
         "care": ["Rest, fluids, avoiding smoke, and saline nose rinsing may help with mild symptoms; ask a pharmacist or clinician about suitable medicines.", "A clinician may consider a steroid nasal spray or allergy treatment. Antibiotics are only appropriate in selected cases after assessment.", "If symptoms recur, last a long time, or affect only one side, ask about further evaluation."],
@@ -488,7 +488,9 @@ def condition_page(condition):
 
 def generic_page(route, title, eyebrow, intro, content, image=None, section=None):
     art = image_for(route, image, title, "page-hero-art reveal") if image else ""
-    hero_class = "page-hero-grid" if image else ""
+    if route == "reviews":
+        art = f'''<a class="google-review-logo" href="{GOOGLE_SEARCH}" target="_blank" rel="noopener noreferrer" aria-label="View customer reviews on Google"><img src="{asset(route, 'assets/google-customer-reviews-clear.png')}" alt="Google Customer Reviews" width="340" height="160"></a>'''
+    hero_class = "review-heading-grid" if route == "reviews" else ("page-hero-grid" if image else "")
     hero = f'''<section class="page-hero"><div class="container"><div class="{hero_class}"><div class="reveal">{breadcrumb(route, title)}<p class="eyebrow">{esc(eyebrow)}</p><h1>{esc(title)}</h1><p class="lead">{esc(intro)}</p></div>{art}</div></div></section>'''
     body = f'<main id="main-content">{hero}{content}</main>'
     return page_shell(route, title, intro, body, section=section or route.split("/",1)[0])
@@ -514,7 +516,7 @@ def pages():
 
 
     review_cards = review_rows_html("reviews")
-    reviews_content = f'''<section class="section"><div class="container review-carousel" data-live-reviews-url="{REVIEWS_API}"><div class="section-head"><div><p class="eyebrow">Patient feedback</p><h2>Latest Google <span class="accent">reviews</span></h2><p>Patient experiences from the clinic’s Google review feed. Select a card to read the full review.</p></div></div>{review_cards}<p class="muted review-feed-note" data-review-status aria-live="polite">Connecting to the clinic’s Google review feed…</p><div class="review-source-panel"><span class="source-mark" aria-hidden="true">G</span><div><h3>Shared on Google. Shown in their own words.</h3><p>Names, ratings and review text come from the clinic’s existing Google review feed. New feedback appears after that feed syncs with Google. Select a reviewer’s name to view their Google profile.</p></div></div></div></section>'''
+    reviews_content = f'''<section class="section"><div class="container review-carousel" data-live-reviews-url="{REVIEWS_API}"><div class="section-head"><div><p class="eyebrow">Patient feedback</p><h2>Latest Google <span class="accent">reviews</span></h2><p>Patient experiences from the clinic’s Google review feed. Select a card to read the full review.</p></div></div>{review_cards}<p class="muted review-feed-note" data-review-status aria-live="polite">Connecting to the clinic’s Google review feed…</p><div class="review-source-panel"><div><h3>Reviews from Google</h3><p>Names, ratings and review text come from the clinic’s existing Google review feed. New feedback appears after that feed syncs with Google. Select a reviewer’s name to view their Google profile.</p><a class="text-link" href="{GOOGLE_SEARCH}" target="_blank" rel="noopener noreferrer">View the clinic on Google ↗</a></div></div></div></section>'''
     output["reviews/index.html"] = generic_page("reviews", "Google reviews", "Reviews", "Read patient feedback sourced from the clinic’s Google review feed.", reviews_content, None, "reviews")
 
     places = [

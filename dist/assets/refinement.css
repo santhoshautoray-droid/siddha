@@ -221,3 +221,46 @@ body:has(dialog[open]) .review-marquee-track { animation-play-state: paused; }
   .review-marquee { overflow-x: auto; }
   .home-video-rail-window { height: auto; overflow-y: auto; }
 }
+
+/* Compact source badge, inspired by the supplied circular reference. */
+.google-review-badge { display:flex; flex:0 0 116px; width:116px; height:116px; box-sizing:border-box; flex-direction:column; align-items:center; justify-content:center; gap:8px; border:5px solid transparent; border-radius:50%; background:linear-gradient(#fff,#fff) padding-box,conic-gradient(#ea4335 0 25%,#fbbc05 25% 50%,#34a853 50% 75%,#4285f4 75% 100%) border-box; text-decoration:none; color:#202124; }
+.google-review-badge__word { display:flex; font-size:25px; font-weight:600; line-height:1; letter-spacing:-1.5px; }
+.google-review-badge__word span:nth-child(1),.google-review-badge__word span:nth-child(4) {color:#4285f4;}
+.google-review-badge__word span:nth-child(2),.google-review-badge__word span:nth-child(6) {color:#ea4335;}
+.google-review-badge__word span:nth-child(3) {color:#fbbc05;}
+.google-review-badge__word span:nth-child(5) {color:#34a853;}
+.google-review-badge__label {font-size:11px; line-height:1.3; font-weight:650; text-align:center;}
+.google-review-badge:focus-visible {outline:2px solid var(--accent); outline-offset:5px;}
+.review-source-panel > div {min-width:0;}
+.review-source-panel .text-link {display:inline-block; margin-top:12px;}
+@media(max-width:600px) { .review-source-panel {flex-direction:column; align-items:center; text-align:center;} .google-review-badge {flex-basis:auto; width:100px; height:100px;} .google-review-badge__word {font-size:23px;} }
+
+/* Keep the review source badge on the right of its section. */
+.review-source-panel > .google-review-badge { order: 2; margin-left: auto; }
+.review-source-panel > div { order: 1; flex: 1; }
+@media (max-width:600px) {
+  .review-source-panel > .google-review-badge { order: 0; align-self: flex-end; margin-left: auto; }
+  .review-source-panel > div { width: 100%; text-align: left; }
+}
+
+.review-heading-grid {display:flex; align-items:center; justify-content:space-between; gap:32px;}
+.review-heading-grid > .reveal {min-width:0; flex:1;}
+.review-heading-grid > .google-review-badge {flex-shrink:0; margin-right:12px;}
+@media(max-width:600px) {
+ .review-heading-grid {gap:16px; flex-wrap:wrap;}
+ .review-heading-grid > .reveal {flex-basis:100%;}
+ .review-heading-grid > .google-review-badge {margin-left:auto; margin-right:0;}
+}
+
+.google-review-logo {display:block; flex:0 0 280px; max-width:100%; background:transparent;}
+.google-review-logo img {display:block; width:100%; height:auto; object-fit:contain;}
+.google-review-logo:focus-visible {outline:2px solid #a9da71; outline-offset:6px;}
+@media(max-width:600px) {.google-review-logo {flex-basis:220px; width:220px; margin-left:auto;}}
+
+/* The mobile navbar is in normal flow, so the review hero needs no header offset. */
+@media(max-width:600px) {
+ .page-reviews .page-hero {padding:28px 0 24px; padding-top:28px !important;}
+ .page-reviews .review-heading-grid {gap:10px;}
+ .page-reviews .review-heading-grid .lead {margin-bottom:0;}
+ .page-reviews .page-hero + .section {padding-top:32px;}
+}
