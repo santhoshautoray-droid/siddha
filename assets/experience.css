@@ -207,6 +207,8 @@
   .home-hero-stage .home-gallery-controls { right: 14px; bottom: 14px; }
 }
 @media (max-width: 600px) {
+  .utility-bar { display: none; }
+  .site-header, .page-home .site-header { top: 0; padding: 8px; margin-bottom: 0; background: #0b130e; }
   .utility-inner { justify-content: space-between; }
   .utility-actions { justify-content: space-between; width: 100%; gap: 12px; }
   .utility-actions p { display: block !important; }
